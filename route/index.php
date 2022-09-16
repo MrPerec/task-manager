@@ -29,10 +29,6 @@ $uri = $_SERVER['REQUEST_URI'];
                     include ($_SERVER['DOCUMENT_ROOT'] . MAIN_PATH);
                     include ($_SERVER['DOCUMENT_ROOT'] . RIGHT_COLUMN_PATH);
                 }
-                // } elseif ($uri == '/' || '/route/main/') {
-                //     include ($_SERVER['DOCUMENT_ROOT'] . MAIN_PATH);
-                //     include ($_SERVER['DOCUMENT_ROOT'] . RIGHT_COLUMN_PATH);
-                // }
                 ?>
         </tr>
     </table>

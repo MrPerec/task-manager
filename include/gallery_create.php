@@ -1,6 +1,7 @@
 <?php
 
-// var_dump($_POST);
+var_dump($_POST);
+var_dump($_FILES);
 
 if (isset($_POST['upload']))
 {
@@ -18,7 +19,7 @@ if (isset($_POST['upload']))
 
 <p>
   <form enctype="multipart/form-data" method="POST" action="<?=$uri?>">
-    <input type="file" name="pictures" />
+    <input type="file" name="pictures" required multiple title="Загрузите одну или несколько фотографий" />
     <br/>
     <p>
       <input type="submit" name="upload" value="Загрузить" />

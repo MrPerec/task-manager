@@ -8,7 +8,6 @@ $isAuthorized = false;
 // var_dump($_SERVER);
 
 if (isset($_POST['login'])) {
-// if (!empty($_POST)) {
     include_once $_SERVER['DOCUMENT_ROOT'] . USERS_PATH;
     include_once $_SERVER['DOCUMENT_ROOT'] . PASSWORDS_PATH;
 

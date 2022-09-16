@@ -1,9 +1,4 @@
-<?php
-
-// if (isset($_GET['login'])) {
-if (!empty($_GET)) { 
-
-?>
+<?php if (!empty($_GET)) {?>
     <div class="index-auth">
         <form action="?login=yes" method="post">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
