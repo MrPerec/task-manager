@@ -1,17 +1,16 @@
 <?php
 
-var_dump($_POST);
 var_dump($_FILES);
 
 if (isset($_POST['upload']))
 {
-  $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/upload/';
+  $uploadPath = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_FOLDER;
 
-  if (!empty($_FILES['pictures']['error'])) 
+  if (empty($_FILES[USER_PICTURES]['error']) && $_FILES[USER_PICTURES]['size'] <= TW0_MB && $_FILES[USER_PICTURES]['type'] == TYPE_PNG || $_FILES[USER_PICTURES]['type'] == TYPE_JPEG) 
   {
-    echo 'Ошибка загрузки';
+    move_uploaded_file($_FILES[USER_PICTURES]['tmp_name'], $uploadPath . $_FILES[USER_PICTURES]['name']);
   } else {
-    move_uploaded_file($_FILES['pictures']['tmp_name'], $uploadPath . $_FILES['pictures']['name']);
+    echo 'Ошибка загрузки';
   }
 } 
 
@@ -19,7 +18,7 @@ if (isset($_POST['upload']))
 
 <p>
   <form enctype="multipart/form-data" method="POST" action="<?=$uri?>">
-    <input type="file" name="pictures" required multiple title="Загрузите одну или несколько фотографий" />
+    <input type="file" name="userPictures[]" required multiple title="Загрузите одну или несколько фотографий" />
     <br/>
     <p>
       <input type="submit" name="upload" value="Загрузить" />
