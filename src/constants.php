@@ -21,9 +21,7 @@ define('GALLERY_PATH', '/include/gallery.php');
 define('GALLERY_CREATE_PATH', '/include/gallery_create.php');
 define('MAIN_PATH', '/include/main.php');
 
-define('USER_PICTURES', 'userPictures');
 define('UPLOAD_FOLDER', '/upload/');
-define('TW0_MB', 2097152);
 define('TYPE_PNG', 'image/png');
 define('TYPE_JPEG', 'image/jpeg');
 ?>
