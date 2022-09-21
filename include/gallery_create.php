@@ -1,7 +1,5 @@
 <?php
 
-// var_dump($_FILES);
-
 if (isset($_POST['upload']))
 {
   $totalFiles = count($_FILES['userPictures']['name']);
@@ -12,6 +10,7 @@ if (isset($_POST['upload']))
 
     for($key = 0; $key < $totalFiles; $key++) {
       $fileName = $_FILES['userPictures']['name'][$key];
+      var_dump($fileName);
 
       if (!empty($_FILES['userPictures']['error'][$key])){
         echo "Ошибка загрузки файла '$fileName'\n";
