@@ -10,6 +10,7 @@ if (isset($_POST['upload']))
 
     for($key = 0; $key < $totalFiles; $key++) {
       $fileName = $_FILES['userPictures']['name'][$key];
+      $now = date('d-m-Y_H-i-s');
       var_dump($fileName);
 
       if (!empty($_FILES['userPictures']['error'][$key])){
