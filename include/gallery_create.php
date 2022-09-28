@@ -1,5 +1,7 @@
 <?php
 
+// var_dump(preg_match('#[a-zA-Z]|[0-9]|\-|\_#', '.'));
+
 if (isset($_POST['upload']))
 {
   $totalFiles = count($_FILES['userPictures']['name']);
@@ -9,18 +11,22 @@ if (isset($_POST['upload']))
     $maxLimitSize = 5 * 1024 * 1024;
 
     for($key = 0; $key < $totalFiles; $key++) {
-      $fileName = $_FILES['userPictures']['name'][$key];
-      $now = date('d-m-Y_H-i-s');
-      var_dump($fileName);
-
+      $originFileName = $_FILES['userPictures']['name'][$key];
+      $fileName = pathinfo($originFileName, PATHINFO_FILENAME);
+      $extension = strtolower(pathinfo($originFileName, PATHINFO_EXTENSION));
+      
       if (!empty($_FILES['userPictures']['error'][$key])){
         echo "Ошибка загрузки файла '$fileName'\n";
+      } elseIf (!(in_array( $extension, array('jpg', 'jpeg', 'png', 'gif', 'bmp')))){
+        echo "Ошибка типа файла '$originFileName'\n";
       } elseIf ($_FILES['userPictures']['size'][$key] > $maxLimitSize){
-        echo "Ошибка размера файла '$fileName'\n";
-      } elseIf (!($_FILES['userPictures']['type'][$key] == TYPE_PNG || $_FILES['userPictures']['type'][$key] == TYPE_JPEG)){
-        echo "Ошибка типа файла '$fileName'\n";
+        echo "Ошибка размера файла '$originFileName'\n";
       } else {
-        move_uploaded_file($_FILES['userPictures']['tmp_name'][$key], $uploadPath . $fileName);
+        // $now = date('d-m-Y_H-i-s');
+        $changedFileName = preg_replace('/[^a-zA-Zа-яёА-ЯЁ0-9-_]/u', '_', $fileName) . '.' . $extension;
+
+        move_uploaded_file($_FILES['userPictures']['tmp_name'][$key], $uploadPath . $changedFileName);
+        echo "Файл '$originFileName' сохранён под именем '$changedFileName' \n";
       }
     }
   } else {
