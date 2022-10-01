@@ -8,6 +8,7 @@ foreach ($uploadDirFiles as $key => $fileName) {
     $fileLastAccessTime = date('d-m-Y_H-i-s', fileatime($fileName));
     $fileChangeIndxTime = date('d-m-Y_H-i-s', filectime($fileName));
     $fileLastChangeTime = date('d-m-Y_H-i-s', filemtime($fileName));
+    
     var_dump("$fileLastAccessTime - $fileName Время последнего доступа к файлу");
     var_dump("$fileChangeIndxTime - $fileName Время изменения индексного дескриптора файла");
     var_dump("$fileLastChangeTime - $fileName Время последнего изменения файла");

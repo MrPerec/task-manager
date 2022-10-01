@@ -2,48 +2,54 @@
 
 $filePicturesArr = $_SERVER['DOCUMENT_ROOT'] . '/src/pictures.txt';
 
-if (isset($_POST['upload']))
-{
-  $totalFiles = count($_FILES['userPictures']['name']);
+if (isset($_POST['upload'])) {
+  $uploadDirPath = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR;
+  $uploadResultStr = "";        
 
-  if ($totalFiles > 0 && $totalFiles < 6) {
-    $uploadDirPath = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR;
-    $maxLimitSize = 5 * 1024 * 1024;
+  if (is_writable($uploadDirPath)) {
+    $totalFiles = count($_FILES['userPictures']['name']);
 
-    for($key = 0; $key < $totalFiles; $key++) {
-      $originFileName = $_FILES['userPictures']['name'][$key];
-      $fileName = pathinfo($originFileName, PATHINFO_FILENAME);
-      $fileExtension = strtolower(pathinfo($originFileName, PATHINFO_EXTENSION));
-      
-      if (!empty($_FILES['userPictures']['error'][$key])){
-        echo "Ошибка загрузки файла '$fileName'\n";
-      } elseIf (!in_array( $fileExtension, EXTENSIONS_ARR)){
-        echo "Ошибка типа файла '$originFileName'\n";
-      } elseIf ($_FILES['userPictures']['size'][$key] > $maxLimitSize){
-        echo "Ошибка размера файла '$originFileName'\n";
-      } else {
-        // $now = date('d-m-Y_H-i-s');
-        $changedFileName = preg_replace('/[^a-zA-Zа-яёА-ЯЁ0-9_\-]/u', '_', $fileName) . '.' . $fileExtension;
+    if ($totalFiles > 0 && $totalFiles < 6) {
+      $maxLimitSize = 5 * 1024 * 1024;
+
+      for($key = 0; $key < $totalFiles; $key++) {
+        $originFileName = $_FILES['userPictures']['name'][$key];
+        $fileName = pathinfo($originFileName, PATHINFO_FILENAME);
+        $fileExtension = strtolower(pathinfo($originFileName, PATHINFO_EXTENSION));
         
-        //вариант при загрузке изображения сразу писать о нем в отдельный файл
-
-//         if (is_writable($filePicturesArr)) {
-//           file_put_contents($filePicturesArr,  
-// "[
-//   'dateLoad' => $now,
-//   'name' => $changedFileName,
-//   'img' => /upload/$changedFileName,
-// ]," . PHP_EOL, 
-//           FILE_APPEND);
-//         }
+        if (!empty($_FILES['userPictures']['error'][$key])){
+          $uploadResultStr = "$uploadResultStr Ошибка загрузки файла '$originFileName'. <br />";
+        } elseIf (!in_array( $fileExtension, EXTENSIONS_ARR)){
+          $uploadResultStr = "$uploadResultStr Ошибка типа файла '$originFileName'. <br />";
+        } elseIf ($_FILES['userPictures']['size'][$key] > $maxLimitSize){
+          $uploadResultStr = "$uploadResultStr Ошибка размера файла '$originFileName'. <br />";
+        } else {
+          $changedFileName = preg_replace('/[^a-zA-Zа-яёА-ЯЁ0-9_\-]/u', '_', $fileName) . '.' . $fileExtension;
+          // $now = date('d-m-Y_H-i-s');
           
-        move_uploaded_file($_FILES['userPictures']['tmp_name'][$key], $uploadDirPath . $changedFileName);
-        echo "Файл '$originFileName' загружен. \n";
+          //вариант при загрузке изображения сразу писать о нем в отдельный файл
+          //         if (is_writable($filePicturesArr)) {
+          //           file_put_contents($filePicturesArr,  
+          // "[
+          //   'dateLoad' => $now,
+          //   'name' => $changedFileName,
+          //   'img' => /upload/$changedFileName,
+          // ]," . PHP_EOL, 
+          //           FILE_APPEND);
+          //         }
+
+          move_uploaded_file($_FILES['userPictures']['tmp_name'][$key], $uploadDirPath . $changedFileName);
+          $uploadResultStr = "$uploadResultStr Файл '$originFileName' загружен. <br />";
+        }
       }
+    } else {
+      echo 'Одновременно можно загрузить от одного до пяти изображений.';
     }
   } else {
-    echo 'Одновременно можно загрузить от одного до пяти изображений.';
+    $uploadResultStr = "Ошибка директории $uploadDirPath";
   }
+
+  echo $uploadResultStr;
 } 
 
 ?>
