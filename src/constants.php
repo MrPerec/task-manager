@@ -21,6 +21,7 @@ define('GALLERY_PATH', '/include/gallery.php');
 define('GALLERY_CREATE_PATH', '/include/gallery_create.php');
 define('MAIN_PATH', '/include/main.php');
 
-define('UPLOAD_FOLDER', '/upload/');
+define('UPLOAD_DIR', '/upload/');
+define('EXTENSIONS_ARR', ['jpg', 'jpeg', 'png', 'gif', 'bmp']);
 
 ?>
