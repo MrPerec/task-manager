@@ -25,18 +25,6 @@ if (isset($_POST['upload'])) {
           $uploadResultStr = "$uploadResultStr Ошибка размера файла '$originFileName'. <br />";
         } else {
           $changedFileName = preg_replace('/[^a-zA-Zа-яёА-ЯЁ0-9_\-]/u', '_', $fileName) . '.' . $fileExtension;
-          // $now = date('d-m-Y_H-i-s');
-          
-          //вариант при загрузке изображения сразу писать о нем в отдельный файл
-          //         if (is_writable($filePicturesArr)) {
-          //           file_put_contents($filePicturesArr,  
-          // "[
-          //   'dateLoad' => $now,
-          //   'name' => $changedFileName,
-          //   'img' => /upload/$changedFileName,
-          // ]," . PHP_EOL, 
-          //           FILE_APPEND);
-          //         }
 
           move_uploaded_file($_FILES['userPictures']['tmp_name'][$key], $uploadDirPath . $changedFileName);
           $uploadResultStr = "$uploadResultStr Файл '$originFileName' загружен. <br />";
