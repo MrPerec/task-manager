@@ -23,17 +23,19 @@ foreach ($uploadDirFiles as $key => $fileName) {
 
   <div class="grid-container">
     <?php 
-      foreach ($picturesArr as $picture) {?>
-        <figure class="text-center">
-          <p><img src="<?=$picture['img']?>" alt="<?=$picture['name']?>" /></p>
-          <figcaption><?=$picture['name']?></figcaption>
-          <span>Дата загрузки: <?=$picture['dateLoad']?></span>
-          <div class="form-check-del-this">
-            <input type="checkbox" id="<?=$picture['id']?>">
-            <label class="form-check-del-this__label" for="<?=$picture['id']?>">Удалить</label>
-          </div>
-        </figure>
-    <?php }?>
+      if (isset($picturesArr)) {
+        foreach ($picturesArr as $picture) {?>
+          <figure class="text-center">
+            <p><img src="<?=$picture['img']?>" alt="<?=$picture['name']?>" /></p>
+            <figcaption><?=$picture['name']?></figcaption>
+            <span>Дата загрузки: <?=$picture['dateLoad']?></span>
+            <div class="form-check-del-this">
+              <input type="checkbox" id="<?=$picture['id']?>">
+              <label class="form-check-del-this__label" for="<?=$picture['id']?>">Удалить</label>
+            </div>
+          </figure>
+        <?php }
+      }?>
   </div>
 
   <hr class="my-4">

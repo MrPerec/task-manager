@@ -6,4 +6,4 @@ include 'getTitle.php';
 include 'showMenu.php';
 
 include 'main_menu.php';
-include 'pictures.php';
+// include 'pictures.php';
