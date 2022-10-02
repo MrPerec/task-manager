@@ -1,11 +1,8 @@
 <?php
+
 require_once ($_SERVER['DOCUMENT_ROOT'] . CORE_PATH);
 
 $isAuthorized = false;
-
-// var_dump($_GET);
-// var_dump($_POST);
-// var_dump($_SERVER);
 
 if (isset($_POST['login'])) {
     include_once $_SERVER['DOCUMENT_ROOT'] . USERS_PATH;
