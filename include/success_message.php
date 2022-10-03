@@ -1,1 +1,1 @@
-<div class="index-auth__text_green">Вы успешно авторизовались.</div>
+<div class="text_success">Вы успешно авторизовались.</div>

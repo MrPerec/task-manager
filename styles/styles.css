@@ -210,12 +210,12 @@ a:hover {
   display: block;
 }
 
-.index-auth__text_green {
+.text_success {
   font-size: 16px;
   color: green;
   text-align: center;
 }
-.index-auth__text_red {
+.text_error {
   font-size: 16px;
   color: red;
   text-align: center;

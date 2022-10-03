@@ -1,1 +1,1 @@
-<div class="index-auth__text_red">Неверный логин и пароль.</div>
+<div class="text_error">Неверный логин и пароль.</div>
