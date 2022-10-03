@@ -1,7 +1,5 @@
 <?php
 
-$filePicturesArr = $_SERVER['DOCUMENT_ROOT'] . '/src/pictures.txt';
-
 if (isset($_POST['upload'])) {
   $uploadDirPath = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR;
 
