@@ -1,7 +1,6 @@
 <?php
 
 $uploadDirPath = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR;
-$uploadDirFiles = scandir($uploadDirPath);
 
 if (isset($_POST["delPicturesAll"])) {
   array_map('unlink', glob($uploadDirPath . '*'));
@@ -20,23 +19,21 @@ if (isset($_POST["delPicturesArr"])) {
   <hr class="my-4">
   <div class="grid-container">
     
-    <?php if (count($uploadDirFiles) > 2) {
-      foreach ($uploadDirFiles as $key => $fileName) {
-        if (!is_dir($fileName)) {
-          $uploadTime = date('d-m-Y H-i-s', filemtime($uploadDirPath . $fileName));?>
-          
-          <figure class="text-center">
-            <p><img src="<?=UPLOAD_DIR . $fileName?>" alt="<?=$fileName?>" /></p>
-            <figcaption><?=$fileName?></figcaption>
-            <span>Дата загрузки: <?=$uploadTime?></span>
-            <div class="form-check-del-this">
-              <input type="checkbox" id="<?=$key?>" name="delPicturesArr[<?=$key?>]" value="<?=$fileName?>">
-              <label class="form-check-del-this__label" for="<?=$key?>">Удалить</label>
-            </div>
-          </figure>
-      
-        <?php }
-      }
+    <?php foreach (scandir($uploadDirPath) as $key => $fileName) {
+      if (!is_dir($fileName)) {
+        $uploadTime = date('d-m-Y H-i-s', filectime($uploadDirPath . $fileName));?>
+        
+        <figure class="text-center">
+          <p><img src="<?=UPLOAD_DIR . $fileName?>" alt="<?=$fileName?>" /></p>
+          <figcaption><?=$fileName?></figcaption>
+          <span>Дата загрузки: <?=$uploadTime?></span>
+          <div class="form-check-del-this">
+            <input type="checkbox" id="<?=$key?>" name="delPicturesArr[<?=$key?>]" value="<?=$fileName?>">
+            <label class="form-check-del-this__label" for="<?=$key?>">Удалить</label>
+          </div>
+        </figure>
+    
+      <?php }
     }?>
       
   </div>

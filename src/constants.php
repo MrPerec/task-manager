@@ -23,5 +23,6 @@ define('MAIN_PATH', '/include/main.php');
 
 define('UPLOAD_DIR', '/upload/');
 define('EXTENSIONS_ARR', ['jpg', 'jpeg', 'png', 'gif', 'bmp']);
+define('maxLimitSize', 2 * 1024 * 1024);
 
 ?>

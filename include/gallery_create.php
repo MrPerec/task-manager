@@ -7,14 +7,12 @@ if (isset($_POST['upload'])) {
     $totalFiles = count($_FILES['userPictures']['name']);
 
     if ($totalFiles > 0 && $totalFiles < 6) {
-      $maxLimitSize = 5 * 1024 * 1024;
-
       for($key = 0; $key < $totalFiles; $key++) {
         $originFileName = $_FILES['userPictures']['name'][$key];
         $fileName = pathinfo($originFileName, PATHINFO_FILENAME);
         $fileExtension = strtolower(pathinfo($originFileName, PATHINFO_EXTENSION));
 
-        if (!empty($_FILES['userPictures']['error'][$key]) || !in_array( $fileExtension, EXTENSIONS_ARR) || $_FILES['userPictures']['size'][$key] > $maxLimitSize){
+        if (!empty($_FILES['userPictures']['error'][$key]) || !in_array( $fileExtension, EXTENSIONS_ARR) || $_FILES['userPictures']['size'][$key] > maxLimitSize){
           \showMessage\showMessage("Ошибка загрузки файла '$originFileName'.", false);
         } else {
           $changedFileName = preg_replace('/[^a-zA-Zа-яёА-ЯЁ0-9_\-]/u', '_', $fileName) . '.' . $fileExtension;
