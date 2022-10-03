@@ -44,6 +44,6 @@ if (isset($_POST["userPictures"])) {
     <label class="form-check-del-all__label" for="del-all">Удалить всё</label>
   </div>
   <br>
-  <input class="btn" type="submit" value="Удалить"></input>
+  <input class="btn" type="submit" name="remove" value="Удалить"></input>
 </form>
 </td>

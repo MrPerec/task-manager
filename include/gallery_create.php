@@ -4,7 +4,6 @@ $filePicturesArr = $_SERVER['DOCUMENT_ROOT'] . '/src/pictures.txt';
 
 if (isset($_POST['upload'])) {
   $uploadDirPath = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR;
-  $uploadResultStr = "";        
 
   if (is_writable($uploadDirPath)) {
     $totalFiles = count($_FILES['userPictures']['name']);
@@ -16,28 +15,22 @@ if (isset($_POST['upload'])) {
         $originFileName = $_FILES['userPictures']['name'][$key];
         $fileName = pathinfo($originFileName, PATHINFO_FILENAME);
         $fileExtension = strtolower(pathinfo($originFileName, PATHINFO_EXTENSION));
-        
-        if (!empty($_FILES['userPictures']['error'][$key])){
-          $uploadResultStr = "$uploadResultStr Ошибка загрузки файла '$originFileName'. <br />";
-        } elseIf (!in_array( $fileExtension, EXTENSIONS_ARR)){
-          $uploadResultStr = "$uploadResultStr Ошибка типа файла '$originFileName'. <br />";
-        } elseIf ($_FILES['userPictures']['size'][$key] > $maxLimitSize){
-          $uploadResultStr = "$uploadResultStr Ошибка размера файла '$originFileName'. <br />";
+
+        if (!empty($_FILES['userPictures']['error'][$key]) || !in_array( $fileExtension, EXTENSIONS_ARR) || $_FILES['userPictures']['size'][$key] > $maxLimitSize){
+          \showMessage\showMessage("Ошибка загрузки файла '$originFileName'.", false);
         } else {
           $changedFileName = preg_replace('/[^a-zA-Zа-яёА-ЯЁ0-9_\-]/u', '_', $fileName) . '.' . $fileExtension;
 
           move_uploaded_file($_FILES['userPictures']['tmp_name'][$key], $uploadDirPath . $changedFileName);
-          $uploadResultStr = "$uploadResultStr Файл '$originFileName' загружен. <br />";
+          \showMessage\showMessage("Файл '$originFileName' загружен.", true);
         }
       }
     } else {
-      echo 'Одновременно можно загрузить от одного до пяти изображений.';
+      \showMessage\showMessage("Одновременно можно загрузить от одного до пяти изображений.", false);
     }
   } else {
-    $uploadResultStr = "Ошибка директории $uploadDirPath";
+    \showMessage\showMessage("Ошибка директории '$uploadDirPath'", false);
   }
-
-  echo $uploadResultStr;
 } 
 
 ?>
