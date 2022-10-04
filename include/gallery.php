@@ -14,8 +14,16 @@ if (isset($_POST["delPicturesArr"])) {
 
 ?>
 
-<p>Для добавления изображений в галерею нажмите <a href='/route/gallery/create/'>тут</a></p>
-<form class="text-center" method="POST" action="<?=$uri?>">
+<form class="js-form">
+  <input type="file" name="userPictures[]" multiple title="Загрузите одну или несколько фотографий" />
+  <br>
+  <br>
+  <button class="js-upload">Upload</button>
+</form>
+<!-- <input class="js-upload" type="submit" name="upload" value="Загрузить" /> -->
+
+<!-- <p>Для добавления изображений в галерею нажмите <a href='/route/gallery/create/'>тут</a></p> -->
+<form method="POST" action="<?=$uri?>">
   <hr class="my-4">
   <div class="grid-container">
     
@@ -39,11 +47,12 @@ if (isset($_POST["delPicturesArr"])) {
   </div>
   <hr class="my-4">
 
-  <div class="form-check-del-all">
-    <input type="checkbox" id="delPicturesAll" name="delPicturesAll" value="delPicturesAll">
-    <label class="form-check-del-all__label" for="delPicturesAll">Удалить всё</label>
-  </div>
-  <br>
-  <input class="btn" type="submit" value="Удалить"></input>
+    <div class="form-check-del-all text-center">
+      <input type="checkbox" id="delPicturesAll" name="delPicturesAll" value="delPicturesAll">
+      <label class="form-check-del-all__label" for="delPicturesAll">Удалить всё</label>
+      <br>
+      <br>
+      <input class="btn" type="submit" value="Удалить"></input>
+    </div>
 </form>
 </td>
