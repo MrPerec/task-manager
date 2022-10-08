@@ -15,14 +15,12 @@ if (isset($_POST["delPicturesArr"])) {
 ?>
 
 <form class="js-form">
-  <input type="file" name="userPictures[]" multiple title="Загрузите одну или несколько фотографий" />
+  <input type="file" name="pictures[]" multiple>
   <br>
   <br>
-  <button class="js-upload">Upload</button>
+  <input type="submit">
 </form>
-<!-- <input class="js-upload" type="submit" name="upload" value="Загрузить" /> -->
 
-<!-- <p>Для добавления изображений в галерею нажмите <a href='/route/gallery/create/'>тут</a></p> -->
 <form method="POST" action="<?=$uri?>">
   <hr class="my-4">
   <div class="grid-container">
@@ -56,3 +54,5 @@ if (isset($_POST["delPicturesArr"])) {
     </div>
 </form>
 </td>
+<!-- <script type="text/javascript" src="/js/jquery-3.6.1.min.js"></script> -->
+<script type="text/javascript" src="/js/script.js"></script>

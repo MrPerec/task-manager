@@ -23,8 +23,6 @@ $uri = $_SERVER['REQUEST_URI'];
                     include ($_SERVER['DOCUMENT_ROOT'] . OPPORTUNITY_PATH);
                 } elseif ($uri == '/route/gallery/') {
                     include ($_SERVER['DOCUMENT_ROOT'] . GALLERY_PATH);
-                } elseif ($uri == '/route/gallery/create/') {
-                    include ($_SERVER['DOCUMENT_ROOT'] . GALLERY_CREATE_PATH);
                 } else {
                     include ($_SERVER['DOCUMENT_ROOT'] . MAIN_PATH);
                     include ($_SERVER['DOCUMENT_ROOT'] . RIGHT_COLUMN_PATH);

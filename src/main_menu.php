@@ -36,9 +36,4 @@ $menuArray = [
 		'path' => '/route/gallery/',
 		'sort' => 6,
 	],
-	[
-		'title' => 'Загрузка изображения',
-		'path' => '/route/gallery/create/',
-		'sort' => 7,
-	],
 ];
