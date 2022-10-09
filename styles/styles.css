@@ -211,11 +211,13 @@ a:hover {
 }
 
 .text_success {
+  display: block;
   font-size: 16px;
   color: green;
   text-align: center;
 }
 .text_error {
+  display: block;
   font-size: 16px;
   color: red;
   text-align: center;
