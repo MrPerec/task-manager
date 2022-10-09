@@ -1,46 +1,44 @@
-// const $formElem = $(`.js-form`);
-// // const $inputPictureElem = $(`.js-input-pictures`);
-// // const $uploadBtn = $(`.js-upload`);
-// console.log($formElem);
-// $($formElem).on(`submit`, function (event) {
-//   event.preventDefault();
+`use strict`;
 
-//   // const fileData = $($inputPictureElem).prop("files")[0];
-//   let formData = new FormData($formElem);
-  
-//   // formData.append("userPictures", fileData);
-//   $.ajax({
-//       url: "/route/gallery/",
-//       dataType: 'script',
-//       cache: false,
-//       contentType: false,
-//       processData: false,
-//       data: formData,                         
-//       type: 'POST',
-//       success: function(){
-//           console.log("works"); 
-//       }
-//   });
-// });
+function upload(url, data) {
+  return $.ajax({
+    url: url,
+    type: 'POST',
+    data: data,
+    processData: false,
+    contentType: false,
+    dataType: `json`,
+    error: (xhr, ajaxOptions) => alert(`${ajaxOptions} ${xhr.status} ${xhr.statusText}`),
+    success: (data) => data,
+  });
+}
 
-const URL = '/src/gallery_create.php';
-const $formElem = document.querySelector(`.js-form`);
+const $formElem = $(`.js-form`);
+const $contentElem = $(`.js-content`);
 
-$formElem.onsubmit = async (event) => {
+$($formElem).on(`submit`, function (event) {
   event.preventDefault();
 
-  const formData = new FormData($formElem);
+  const URL = '/src/gallery_create.php';
+  const formData = new FormData($formElem[0]);
 
-  let response = await fetch(URL, {
-    method: 'POST',
-    body: formData
+  upload(URL, formData).then((response) => {
+    response.forEach(({ loaded, message, fileName, filePath }) => {
+      const textStyle = loaded ? `text_success` : `text_error`;
+      const $newMessageElem = $(`<b class="${textStyle}">${message}</b>`);
+
+      $($formElem).after($newMessageElem);
+
+      if (loaded) {
+        const $newPictureElem = $(`
+          <figure class="text-center">
+            <p><img src="${filePath}" alt="${fileName}" /></p>
+            <figcaption>${fileName}</figcaption>
+          </figure>
+        `);
+
+        $($contentElem).append($newPictureElem);
+      }
+    });
   });
-
-  if (response.ok) {
-    let json = await response.json();
-    console.log(json);
-  } else {
-    console.log("Ошибка HTTP: " + response.status);
-  }
-
-};
+});
