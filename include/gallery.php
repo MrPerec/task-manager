@@ -23,7 +23,7 @@ if (isset($_POST["delPicturesArr"])) {
 
 <form method="POST" action="<?=$uri?>">
   <hr class="my-4">
-  <div class="grid-container">
+  <div class="js-content grid-container">
     
     <?php foreach (scandir($uploadDirPath) as $key => $fileName) {
       if (!is_dir($fileName)) {
@@ -40,7 +40,7 @@ if (isset($_POST["delPicturesArr"])) {
         </figure>
     
       <?php }
-    }?>
+    } ?>
       
   </div>
   <hr class="my-4">
@@ -54,5 +54,5 @@ if (isset($_POST["delPicturesArr"])) {
     </div>
 </form>
 </td>
-<!-- <script type="text/javascript" src="/js/jquery-3.6.1.min.js"></script> -->
+<script type="text/javascript" src="/js/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="/js/script.js"></script>
