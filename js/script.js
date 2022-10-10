@@ -13,6 +13,30 @@ function upload(url, data) {
   });
 }
 
+function convertFileSize(bytes) {
+  const TEN_KB = 10240;
+  const ONE_MB = 1048576;
+
+  if (bytes < TEN_KB) return `${bytes} b`;
+  if (TEN_KB < bytes && bytes < ONE_MB) return `${(bytes/1024).toFixed(2)} Kb`;
+  if (bytes > ONE_MB) return `${(bytes/1024/1024).toFixed(2)} Mb`;
+}
+
+let $newMessageElem = (style, text) => $(`<b class="${style}">${text}</b>`);
+let $newPictureElem = (path, name, time, id, size) => $(
+  `<figure class="text-center">
+    <p><img src="${path}" alt="${name}" /></p>
+    <figcaption>${name}</figcaption>
+    <span>Дата загрузки: ${time}</span>
+    <br>
+    <span>Размер: ${size}</span>
+    <div class="form-check-del-this">
+      <input type="checkbox" id="${id}" name="delPicturesArr[${id}]" value="${name}">
+      <label class="form-check-del-this__label" for="${id}">Удалить</label>
+    </div>
+  </figure>`
+)
+
 const $formElem = $(`.js-form`);
 const $contentElem = $(`.js-content`);
 
@@ -23,21 +47,16 @@ $($formElem).on(`submit`, function (event) {
   const formData = new FormData($formElem[0]);
 
   upload(URL, formData).then((response) => {
-    response.forEach(({ loaded, message, fileName, filePath }) => {
-      const textStyle = loaded ? `text_success` : `text_error`;
-      const $newMessageElem = $(`<b class="${textStyle}">${message}</b>`);
+    let key = 0;
 
-      $($formElem).after($newMessageElem);
+    response.forEach(({ loaded, message, fileName, uploadTime, filePath, fileSize }) => {
+      const className = loaded ? `text_success` : `text_error`;
+
+      $($formElem).after().append($newMessageElem(className, message));
 
       if (loaded) {
-        const $newPictureElem = $(`
-          <figure class="text-center">
-            <p><img src="${filePath}" alt="${fileName}" /></p>
-            <figcaption>${fileName}</figcaption>
-          </figure>
-        `);
-
-        $($contentElem).append($newPictureElem);
+        $($contentElem).append($newPictureElem(filePath, fileName, uploadTime, key, convertFileSize(fileSize)));
+        key++;
       }
     });
   });
