@@ -1,20 +1,23 @@
 <?php
 
-include_once ('constants.php');
-
 if (isset($_FILES['pictures'])) {
-  $uploadDir = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR;
-  $result = []; 
   $totalFiles = count($_FILES['pictures']['name']);
   $uploadError = $_FILES['pictures']['error'][array_key_first($_FILES['pictures']['error'])];
-
+  
   if ($uploadError != UPLOAD_ERR_NO_FILE && $totalFiles < 6) {
+    include_once ('constants.php');
+    include_once $_SERVER['DOCUMENT_ROOT'] . EXTENSIONS;
+
+    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR;
+    $result = []; 
+    $maxLimitSize = 2 * 1024 * 1024;
+
     for($key = 0; $key < $totalFiles; $key++) {
       $originFileName = $_FILES['pictures']['name'][$key];
       $fileName = pathinfo($originFileName, PATHINFO_FILENAME);
       $fileExtension = strtolower(pathinfo($originFileName, PATHINFO_EXTENSION));
 
-      if (!empty($_FILES['pictures']['error'][$key]) || !in_array( $fileExtension, EXTENSIONS_ARR) || $_FILES['pictures']['size'][$key] > maxLimitSize){
+      if (!empty($_FILES['pictures']['error'][$key]) || !in_array($fileExtension, $extensions) || $_FILES['pictures']['size'][$key] > $maxLimitSize){
         $result[] = [
           'loaded' => false,
           'message' => "Error loading file \"$originFileName\".",
