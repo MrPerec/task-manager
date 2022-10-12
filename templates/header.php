@@ -1,12 +1,12 @@
 <?php
 
-require_once ($_SERVER['DOCUMENT_ROOT'] . CORE_PATH);
+require_once ($_SERVER['DOCUMENT_ROOT'] . CORE);
 
 $isAuthorized = false;
 
-if (isset($_POST['login'])) {
-    include_once $_SERVER['DOCUMENT_ROOT'] . USERS_PATH;
-    include_once $_SERVER['DOCUMENT_ROOT'] . PASSWORDS_PATH;
+if (isset($_POST['login']) && isset($_POST['password'])) {
+    include_once $_SERVER['DOCUMENT_ROOT'] . USERS_ARR;
+    include_once $_SERVER['DOCUMENT_ROOT'] . PASSWORDS_ARR;
 
     if ((in_array($_POST['login'], $users) && in_array($_POST['password'], $passwords)) && (array_flip($users)[$_POST['login']] == array_flip($passwords)[$_POST['password']])) {
         $isAuthorized = true;
