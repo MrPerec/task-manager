@@ -7,5 +7,7 @@
         </ul>
         <div class="clearfix"></div>
     </div>
-    <?php require_once ($_SERVER['DOCUMENT_ROOT'] . AUTH_PATH); ?>
+    <?php if (isset($_GET['login'])) {
+        require_once ($_SERVER['DOCUMENT_ROOT'] . AUTH_BLOCK); 
+    }?>
 </td>
