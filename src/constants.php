@@ -14,7 +14,7 @@ define('FOOTER', '/templates/footer.php');
 define('SUCC_MSG', '/include/success_message.php');
 define('ERR_MSG', '/include/error_message.php');
 define('ABOUT_PAGE', '/include/about.php');
-define('CONTACTS', '/include/contacts.php');
+define('CONTACTS_PAGE', '/include/contacts.php');
 define('NEWS_PAGE', '/include/news.php');
 define('CATALOG_PAGE', '/include/catalog.php');
 define('OPPORTUNITY_PAGE', '/include/opportunity.php');

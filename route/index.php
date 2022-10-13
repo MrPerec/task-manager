@@ -14,7 +14,7 @@ $uri = $_SERVER['REQUEST_URI'];
                 <?php if ($uri == '/route/about/') {
                         include ($_SERVER['DOCUMENT_ROOT'] . ABOUT_PAGE);
                     } elseif ($uri == '/route/contacts/') {
-                        include ($_SERVER['DOCUMENT_ROOT'] . CONTACTS);
+                        include ($_SERVER['DOCUMENT_ROOT'] . CONTACTS_PAGE);
                     } elseif ($uri == '/route/news/') {
                         include ($_SERVER['DOCUMENT_ROOT'] . NEWS_PAGE);
                     } elseif ($uri == '/route/catalog/') {
