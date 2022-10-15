@@ -10,7 +10,7 @@ $uri = $_SERVER['REQUEST_URI'];
     <table width="100%" cellspacing="0" cellpadding="0">
         <tr>
             <td class="left-collum-index">
-                <h1><?=getTitle($menuArray)?></h1>
+                <h1><?=getTitle($mainMenu)?></h1>
                 <?php if ($uri == '/route/about/') {
                         include ($_SERVER['DOCUMENT_ROOT'] . ABOUT_PAGE);
                     } elseif ($uri == '/route/contacts/') {

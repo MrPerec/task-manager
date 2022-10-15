@@ -1,6 +1,6 @@
 <?php
 
-$menuArray = [
+$mainMenu = [
 	[
 		'title' => 'Главная',
 		'path' => '/route/main/',
