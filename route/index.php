@@ -10,9 +10,9 @@ require_once ($serverRootPath . HEADER);
     <table width="100%" cellspacing="0" cellpadding="0">
         <tr>
             <td class="left-collum-index">
+                <h1><?=getTitle($mainMenu)?></h1>
                 <?php
-                if (isset($_SESSION['isAuthorized'])) {
-                    ?><h1><?=getTitle($mainMenu)?></h1><?php
+                if (isLogin()) {
                     if ($uri == URI_ABOUT) {
                         include ($serverRootPath . ABOUT_PAGE);
                     } elseif ($uri == URI_CONTACTS) {
@@ -25,15 +25,11 @@ require_once ($serverRootPath . HEADER);
                         include ($serverRootPath . OPPORTUNITY_PAGE);
                     } elseif ($uri == URI_GALLERY) {
                         include ($serverRootPath . GALLERY_PAGE);
-                    } else {
-                        include ($serverRootPath . MAIN_PAGE);
-                        include ($serverRootPath . RIGHT_COLUMN);
                     }
-                } else {
-                    ?><h1>Главная</h1><?php
-                    include ($serverRootPath . MAIN_PAGE);
-                    include ($serverRootPath . RIGHT_COLUMN);
-                }
+                } 
+
+                include ($serverRootPath . MAIN_PAGE);
+                include ($serverRootPath . RIGHT_COLUMN);
                 ?>
             </td>
         </tr>
