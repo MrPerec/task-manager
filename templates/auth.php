@@ -15,7 +15,6 @@ if (isset($_GET['login'])) {
         } else {
             include_once $serverRootPath . ERR_MSG;
 
-            $_SESSION['isAuthorized'] = false;
             $inputLoginValue = $_POST['login'];
             $inputPassValue = $_POST['password'];
         }

@@ -11,25 +11,20 @@ namespace showMenu;
  */
 function showMenu(array $array, string $key = 'sort', bool $line = true)
 {
-    if ($key != 'sort') {
-        $sortedArray = arraySort($array, $key, SORT_DESC);
-    } else {
-        $sortedArray = arraySort($array);
-    }?>
+    $sortedArray = ($key != 'sort') ? arraySort($array, $key, SORT_DESC) : arraySort($array); ?>
 
     <div class="<?=$line ? 'clear' : 'clearfix'?>">
-        <ul class="<?=$line ? 'main-menu' : 'main-menu bottom'?>">
+        <ul class="main-menu <?=$line ? '' : 'bottom'?>">
+            
             <?php foreach ($sortedArray as $value) {
                 $curTitle = $value['title'];
                 $curPath = $value['path'];
-
-                if (getTitle($array) == $curTitle) {
-                    ?>
-                    <li><a class="<?=$line ? 'link_font-size-16 link_text-decoration' : 'link_font-size-12 link_text-decoration'?>" href=<?=$curPath?>><?=cutString($curTitle)?></a></li>
-                <?php } else { ?>
-                    <li><a class="<?=$line ? 'link_font-size-16' : 'link_font-size-12'?>" href=<?=$curPath?>><?=cutString($curTitle)?></a></li>
-                <?php }
-            } ?>
+                
+                $textDecorat = (getTitle($array) == $curTitle) ? 'link_text-decoration' : '';
+                $textSize = $line ? 'link_font-size-16' : 'link_font-size-12';?> 
+                
+                <li><a class="<?="$textSize $textDecorat"?>" href=<?=$curPath?>><?=cutString($curTitle)?></a></li> 
+            <?php } ?>
         </ul>
     </div>
 
