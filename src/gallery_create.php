@@ -6,7 +6,6 @@ if (isset($_FILES['pictures'])) {
   
   if ($uploadError != UPLOAD_ERR_NO_FILE && $totalFiles < 6) {
     include_once ('constants.php');
-    include_once $_SERVER['DOCUMENT_ROOT'] . EXTENSIONS;
 
     $uploadDir = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR;
     $result = []; 
@@ -17,7 +16,7 @@ if (isset($_FILES['pictures'])) {
       $fileName = pathinfo($originFileName, PATHINFO_FILENAME);
       $fileExtension = strtolower(pathinfo($originFileName, PATHINFO_EXTENSION));
 
-      if (!empty($_FILES['pictures']['error'][$key]) || !in_array($fileExtension, $extensions) || $_FILES['pictures']['size'][$key] > $maxLimitSize){
+      if (!empty($_FILES['pictures']['error'][$key]) || !in_array($fileExtension, EXTENSIONS) || $_FILES['pictures']['size'][$key] > $maxLimitSize){
         $result[] = [
           'loaded' => false,
           'message' => "Error loading file \"$originFileName\".",

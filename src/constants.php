@@ -4,7 +4,6 @@ define('CORE', '/src/core.php');
 
 define('USERS', '/data/users.php');
 define('PASSWORDS', '/data/passwords.php');
-define('EXTENSIONS', '/data/extensions.php');
 
 define('HEADER', '/templates/header.php');
 define('AUTH_BLOCK', '/templates/auth.php');
@@ -23,5 +22,7 @@ define('GALLERY_CREATE', '/include/gallery_create.php');
 define('MAIN_PAGE', '/include/main.php');
 
 define('UPLOAD_DIR', '/upload/');
+
+define('EXTENSIONS', ['jpg', 'jpeg', 'png', 'gif', 'bmp']);
 
 ?>
