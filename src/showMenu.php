@@ -14,11 +14,11 @@ namespace showMenu;
 
 function showMenu(array $array, string $key = 'sort', bool $line = true)
 {
-    $sortedArray = ($key != 'sort') ? arraySort($array, $key, SORT_DESC) : arraySort($array); ?>
-
+    $sortedArray = ($key != 'sort') ? arraySort($array, $key, SORT_DESC) : arraySort($array); 
+    ?>
     <div class="<?=$line ? 'clear' : 'clearfix'?>">
-        <ul class="main-menu <?=$line ? '' : 'bottom'?>"> <?php 
-
+        <ul class="main-menu <?=$line ? '' : 'bottom'?>">
+        <?php 
         if (isLogin()) {
             foreach ($sortedArray as $value) {
                 $curTitle = $value['title'];
@@ -26,8 +26,9 @@ function showMenu(array $array, string $key = 'sort', bool $line = true)
                 
                 $textDecor = (getTitle($array) == $curTitle) ? 'link_text-decoration' : '';
                 $textSize = $line ? 'link_font-size-16' : 'link_font-size-12';
-                
-                ?> <li><a class="<?="$textSize $textDecor"?>" href=<?=$curPath?>><?=cutString($curTitle)?></a></li> <?php 
+                ?> 
+                <li><a class="<?="$textSize $textDecor"?>" href=<?=$curPath?>><?=cutString($curTitle)?></a></li> 
+                <?php 
             } 
         } else {
             $curTitle = $array[array_key_first($array)]['title'];
@@ -35,10 +36,12 @@ function showMenu(array $array, string $key = 'sort', bool $line = true)
             
             $textDecor = 'link_text-decoration';
             $textSize = $line ? 'link_font-size-16' : 'link_font-size-12';
-
-            ?> <li><a class="<?="$textSize $textDecor"?>" href=<?=$curPath?>><?=cutString($curTitle)?></a></li> <?php 
-        } ?>
-
+            ?> 
+            <li><a class="<?="$textSize $textDecor"?>" href=<?=$curPath?>><?=cutString($curTitle)?></a></li> 
+            <?php 
+        } 
+        ?>
         </ul>
-    </div> <?php
+    </div> 
+    <?php
  }

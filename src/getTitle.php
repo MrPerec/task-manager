@@ -8,6 +8,7 @@
  * @param string $key принимат строку в качестве ключа массива по которой будет осуществляться поиск заголовка
  * @return string возвращает строку
  */
+
 function getTitle(array $array = [], string $key = 'title') : string
 {
     if (isLogin()) {
