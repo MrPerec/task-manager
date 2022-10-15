@@ -8,7 +8,6 @@ if (isset($_FILES['pictures'])) {
     include_once ('constants.php');
 
     $uploadDir = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR;
-    $result = []; 
     $maxLimitSize = 2 * 1024 * 1024;
 
     for($key = 0; $key < $totalFiles; $key++) {
