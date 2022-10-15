@@ -1,6 +1,6 @@
 <?php
 
-require_once ($_SERVER['DOCUMENT_ROOT'] . CORE);
+require_once ($serverRootPath . CORE);
 
 if (isset($_POST)) {
     session_start();

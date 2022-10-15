@@ -1,6 +1,6 @@
 <?php
 
-$uploadDir = $_SERVER['DOCUMENT_ROOT'] . UPLOAD_DIR;
+$uploadDir = $serverRootPath . UPLOAD_DIR;
 
 if (isset($_POST["delPicturesAll"])) {
   array_map('unlink', glob($uploadDir . '*'));

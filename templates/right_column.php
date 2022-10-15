@@ -7,5 +7,5 @@
         </ul>
         <div class="clearfix"></div>
     </div>
-    <?php require_once ($_SERVER['DOCUMENT_ROOT'] . AUTH_BLOCK);?>
+    <?php require_once ($serverRootPath . AUTH_BLOCK);?>
 </td>

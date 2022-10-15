@@ -1,9 +1,10 @@
 <?php
 
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/src/constants.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . HEADER);
-
 $uri = $_SERVER['REQUEST_URI'];
+$serverRootPath = $_SERVER['DOCUMENT_ROOT'];
+
+require_once ($serverRootPath . '/src/constants.php');
+require_once ($serverRootPath . HEADER);
 
 ?>
 
@@ -11,23 +12,23 @@ $uri = $_SERVER['REQUEST_URI'];
         <tr>
             <td class="left-collum-index">
                 <h1><?=getTitle($mainMenu)?></h1>
-                <?php if ($uri == '/route/about/') {
-                        include ($_SERVER['DOCUMENT_ROOT'] . ABOUT_PAGE);
-                    } elseif ($uri == '/route/contacts/') {
-                        include ($_SERVER['DOCUMENT_ROOT'] . CONTACTS_PAGE);
-                    } elseif ($uri == '/route/news/') {
-                        include ($_SERVER['DOCUMENT_ROOT'] . NEWS_PAGE);
-                    } elseif ($uri == '/route/catalog/') {
-                        include ($_SERVER['DOCUMENT_ROOT'] . CATALOG_PAGE);
-                    } elseif ($uri == '/route/opportunity/') {
-                        include ($_SERVER['DOCUMENT_ROOT'] . OPPORTUNITY_PAGE);
-                    } elseif ($uri == '/route/gallery/') {
-                        include ($_SERVER['DOCUMENT_ROOT'] . GALLERY_PAGE);
+                <?php if ($uri == URI_ABOUT) {
+                        include ($serverRootPath . ABOUT_PAGE);
+                    } elseif ($uri == URI_CONTACTS) {
+                        include ($serverRootPath . CONTACTS_PAGE);
+                    } elseif ($uri == URI_NEWS) {
+                        include ($serverRootPath . NEWS_PAGE);
+                    } elseif ($uri == URI_CATALOG) {
+                        include ($serverRootPath . CATALOG_PAGE);
+                    } elseif ($uri == URI_OPPORTUNITY) {
+                        include ($serverRootPath . OPPORTUNITY_PAGE);
+                    } elseif ($uri == URI_GALLERY) {
+                        include ($serverRootPath . GALLERY_PAGE);
                     } else {
-                        include ($_SERVER['DOCUMENT_ROOT'] . MAIN_PAGE);
-                        include ($_SERVER['DOCUMENT_ROOT'] . RIGHT_COLUMN);
+                        include ($serverRootPath . MAIN_PAGE);
+                        include ($serverRootPath . RIGHT_COLUMN);
                 } ?>
         </tr>
     </table>
 
-<?php require_once ($_SERVER['DOCUMENT_ROOT'] . FOOTER); ?>
+<?php require_once ($serverRootPath . FOOTER); ?>

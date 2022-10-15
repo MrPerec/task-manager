@@ -21,6 +21,13 @@ define('GALLERY_PAGE', '/include/gallery.php');
 define('GALLERY_CREATE', '/include/gallery_create.php');
 define('MAIN_PAGE', '/include/main.php');
 
+define('URI_ABOUT', '/route/about/');
+define('URI_CONTACTS', '/route/contacts/');
+define('URI_NEWS', '/route/news/');
+define('URI_CATALOG', '/route/catalog/');
+define('URI_OPPORTUNITY', '/route/opportunity/');
+define('URI_GALLERY', '/route/gallery/');
+
 define('UPLOAD_DIR', '/upload/');
 
 define('EXTENSIONS', ['jpg', 'jpeg', 'png', 'gif', 'bmp']);
