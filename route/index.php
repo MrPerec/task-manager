@@ -25,11 +25,15 @@ require_once ($serverRootPath . HEADER);
                         include ($serverRootPath . OPPORTUNITY_PAGE);
                     } elseif ($uri == URI_GALLERY) {
                         include ($serverRootPath . GALLERY_PAGE);
+                    } else {
+                        include ($serverRootPath . MAIN_PAGE);
+                        include ($serverRootPath . RIGHT_COLUMN);
                     }
-                } 
+                } else {
+                    include ($serverRootPath . MAIN_PAGE);
+                    include ($serverRootPath . RIGHT_COLUMN);
+                }
 
-                include ($serverRootPath . MAIN_PAGE);
-                include ($serverRootPath . RIGHT_COLUMN);
                 ?>
             </td>
         </tr>
