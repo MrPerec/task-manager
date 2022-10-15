@@ -7,12 +7,13 @@ require_once ($serverRootPath . '/src/constants.php');
 require_once ($serverRootPath . HEADER);
 
 ?>
-
     <table width="100%" cellspacing="0" cellpadding="0">
         <tr>
             <td class="left-collum-index">
-                <h1><?=getTitle($mainMenu)?></h1>
-                <?php if ($uri == URI_ABOUT) {
+                <?php
+                if (isset($_SESSION['isAuthorized'])) {
+                    ?><h1><?=getTitle($mainMenu)?></h1><?php
+                    if ($uri == URI_ABOUT) {
                         include ($serverRootPath . ABOUT_PAGE);
                     } elseif ($uri == URI_CONTACTS) {
                         include ($serverRootPath . CONTACTS_PAGE);
@@ -27,7 +28,14 @@ require_once ($serverRootPath . HEADER);
                     } else {
                         include ($serverRootPath . MAIN_PAGE);
                         include ($serverRootPath . RIGHT_COLUMN);
-                } ?>
+                    }
+                } else {
+                    ?><h1>Главная</h1><?php
+                    include ($serverRootPath . MAIN_PAGE);
+                    include ($serverRootPath . RIGHT_COLUMN);
+                }
+                ?>
+            </td>
         </tr>
     </table>
 

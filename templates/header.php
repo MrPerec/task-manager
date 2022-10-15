@@ -2,10 +2,7 @@
 
 require_once ($serverRootPath . CORE);
 
-if (isset($_POST)) {
-    session_start();
-}
-
+session_start();
 var_dump($_SESSION);
 
 ?>
@@ -24,5 +21,14 @@ var_dump($_SESSION);
         <div class="author">Автор: <span class="author__name">Макшанов Илья</span></div>
     </div>
 
-    <?=\showMenu\showMenu($mainMenu, 'sort', true)?>
+    <?php
+    if (isset($_SESSION['isAuthorized'])) {
+        \showMenu\showMenu($mainMenu, 'sort', true);
+    } else {?>
+        <div class="clear">
+            <ul class="main-menu">
+                <li><a class="link_font-size-16 link_text-decoration" href="/">Главная</a></li>
+            </ul>
+        </div>
+    <?}?>
 
