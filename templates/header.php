@@ -13,20 +13,13 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     } 
 }
 
-var_dump(isLogin());
-
-if (isLogin()) {
-    $authState = "Выйти";
-    $authLink = "/?logon=yes";
-} else {
-    $authState = "Авторизоваться";
-    $authLink = "/?login=yes";
+if (isset($_GET["logon"])) {
+    unset($_SESSION['isAuthorized']);
+    setcookie(session_name(), '', time() - 42000);
+    session_destroy();
 }
 
-// if (isset($_POST["logon"])) {
-//     session_destroy();
-//     unset($_SESSION['isAuthorized']);
-// }
+var_dump(isLogin());
 
 ?>
 
@@ -42,7 +35,7 @@ if (isLogin()) {
     <div class="header">
         <div class="logo"><img src="/img/logo.png" alt="Project"></div>
         <div class="author">Автор: <span class="author__name">Макшанов Илья</span></div>
-        <div class="project-folders-v-active"><a href="<?=$authLink?>"><?=$authState?></a></div>
+        <div class="project-folders-v-active"><a href="<?=islogin() ? '/?logon=yes' : '/?login=yes'?>"><?=islogin() ? 'Выйти' : 'Авторизоваться'?></a></div>
     </div>
 
     <?php \showMenu\showMenu($mainMenu, 'sort', true); ?>
