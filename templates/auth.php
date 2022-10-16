@@ -22,11 +22,7 @@ if (isset($_GET['login'])) {
                 </tr>
             </table>
         </form>
-        <?php
-        if (isset($_POST['login']) && isset($_POST['password'])) {
-            isLogin() ? include_once $serverRootPath . SUCC_MSG : include_once $serverRootPath . ERR_MSG;
-        }
-        ?>
+        <?php if (!empty($_POST)) isLogin() ? include_once $serverRootPath . SUCC_MSG : include_once $serverRootPath . ERR_MSG; ?>
     </div>
     <? 
 }
