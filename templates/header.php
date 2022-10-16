@@ -3,13 +3,23 @@
 require_once ($serverRootPath . CORE);
 
 session_start();
+
+if (isset($_POST['login']) && isset($_POST['password'])) {
+    include_once $serverRootPath . USERS;
+    include_once $serverRootPath . PASSWORDS;
+    
+    if ((in_array($_POST['login'], $users) && in_array($_POST['password'], $passwords)) && (array_flip($users)[$_POST['login']] == array_flip($passwords)[$_POST['password']])) {
+        $_SESSION['isAuthorized'] = true;
+    } 
+}
+
 var_dump(isLogin());
 
 if (isLogin()) {
     $authState = "Выйти";
     $authLink = "/?logon=yes";
 } else {
-    $authState = "Авторизация";
+    $authState = "Авторизоваться";
     $authLink = "/?login=yes";
 }
 
