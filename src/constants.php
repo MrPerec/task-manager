@@ -27,6 +27,7 @@ define('URI_NEWS', '/route/news/');
 define('URI_CATALOG', '/route/catalog/');
 define('URI_OPPORTUNITY', '/route/opportunity/');
 define('URI_GALLERY', '/route/gallery/');
+define('URI_MAIN', '/route/main/');
 
 define('UPLOAD_DIR', '/upload/');
 
