@@ -4,44 +4,33 @@ require_once ($serverRootPath . CORE);
 
 session_start();
 
-/* if (isset($_POST)) {
-    session_start();
-
-    if (isset($_COOKIE['user'])) {
-        setcookie('user', $_POST['login'], time() + 60 * 60);
-    }
-} */
-
-// $userName = $_POST['login'];
-// $userPwd = $_POST['password'];
-
 if (isset($_POST['login']) && isset($_POST['password'])) {
     include_once $serverRootPath . USERS;
     include_once $serverRootPath . PASSWORDS;
-    
+
     if ((in_array($_POST['login'], $users) && in_array($_POST['password'], $passwords)) && (array_flip($users)[$_POST['login']] == array_flip($passwords)[$_POST['password']])) {
         $_SESSION['isAuthorized'] = true;
-        
-        // setcookie('user', $_POST['login'], time() + 60 * 60 * 24 * 31);
-        // setcookie('user', $_POST['login'], time() + 60 * 60);
     } 
 }
 
 if (islogin()) {
-    setcookie('user', $_POST['login'], time() + 60 * 60);
-} 
+    $arr_cookie_options = [
+        'expires' => time() + 60*60*24*30,
+        'path' => '/',
+    ];
 
-/* if (isset($_COOKIE['user'])) {
-    setcookie('user', $_COOKIE['user'], time() + 60 * 60);
-}*/
+    if (isset($_POST['login'])) {
+        setcookie('user', $_POST['login'], $arr_cookie_options);
+    } else {
+        setcookie('user', $_COOKIE['user'], $arr_cookie_options);
+    }
+} 
 
 if (isset($_GET["logout"])) {
     unset($_SESSION['isAuthorized']);
     setcookie(session_name(), '', time() - 42000);
     session_destroy();
 }
-
-var_dump($_COOKIE);
 
 ?>
 
