@@ -7,5 +7,11 @@
         </ul>
         <div class="clearfix"></div>
     </div>
-    <?php require_once ($serverRootPath . AUTH_BLOCK);?>
+    <?php 
+    if (isLogin()) {
+        if (isset($_GET['login'])) require_once ($serverRootPath . AUTH_BLOCK);
+    } else{
+        require_once ($serverRootPath . AUTH_BLOCK);
+    }
+    ?>
 </td>
