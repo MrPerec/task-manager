@@ -1,6 +1,6 @@
 <?php
 
-$mainMenu = [
+$leftBarMenu = [
 	[
 		'title' => 'Главная',
 		'path' => '/route/main/',

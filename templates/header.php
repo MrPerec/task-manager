@@ -49,5 +49,5 @@ if (isset($_GET["logout"])) {
         <div class="project-folders-v-active"><a href="<?=islogin() ? '/?logout=yes' : '/?login=yes'?>"><?=islogin() ? 'Выйти' : 'Авторизоваться'?></a></div>
     </div>
 
-    <?php \showMenu\showMenu($mainMenu, 'sort', true); ?>
+    <?php \showMenu\showMenu($leftBarMenu, 'sort', true); ?>
 

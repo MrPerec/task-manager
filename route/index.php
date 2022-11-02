@@ -10,7 +10,7 @@ require_once ($serverRootPath . HEADER);
 <table width="100%" cellspacing="0" cellpadding="0">
     <tr>
         <td class="left-collum-index">
-            <h1><?=getTitle($mainMenu)?></h1>
+            <h1><?=getTitle($leftBarMenu)?></h1>
             <?php
             if (isLogin()) {
                 if ($uri == URI_ABOUT) {

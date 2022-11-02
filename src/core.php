@@ -7,4 +7,5 @@ include 'showMenu.php';
 include 'convertFileSize.php';
 include 'isLogin.php';
 
-include 'main_menu.php';
+include 'left_bar_menu.php';
+include 'right_bar_menu.php';
