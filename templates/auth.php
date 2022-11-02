@@ -5,16 +5,16 @@
             <?php if (!isLogin()) { ?>
                 <tr>
                     <td class="iat">
-                        <label for="login_id">Ваш login:</label>
-                        <input id="login_id" size="30" name="login" value="<?=htmlspecialchars(islogin() ? '' : ($_POST['login'] ?? ($_COOKIE['user'] ?? '')))?>">
+                        <label for="login_id">Ваш login*:</label>
+                        <input id="login_id" size="30" name="login" required value="<?=htmlspecialchars(islogin() ? '' : ($_POST['login'] ?? ($_COOKIE['user'] ?? '')))?>">
                     </td>
                 </tr>
             <? } ?>
             
             <tr>
                 <td class="iat">
-                    <label for="password_id">Ваш пароль:</label>
-                    <input id="password_id" size="30" name="password" type="password" value="<?=htmlspecialchars(islogin() ? '' : $_POST['password'] ?? '')?>">
+                    <label for="password_id">Ваш пароль*:</label>
+                    <input id="password_id" size="30" name="password" type="password" required value="<?=htmlspecialchars(islogin() ? '' : $_POST['password'] ?? '')?>">
                 </td>
             </tr>
             <tr>
