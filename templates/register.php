@@ -1,3 +1,11 @@
+<?php
+
+if (isset($_GET['register'])) {
+    connect();
+}
+
+?>
+
 <div class="index-auth">
     <h3>Для регистрации на сайте заполните поля</h3>
     <form action="?register=yes" method="post">
