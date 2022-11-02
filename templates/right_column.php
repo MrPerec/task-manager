@@ -1,12 +1,26 @@
+<?php
+
+$menuArrRigthBar = [
+    [
+        'id' => 'login',
+		'title' => 'Авторизация',
+		'path' => '/?login=yes',
+	],
+    [
+        'id' => 'registration',
+		'title' => 'Регистрация',
+		'path' => '/?registration=yes',
+	],
+    [
+        'id' => 'forgot',
+		'title' => 'Забыли пароль?',
+		'path' => '/?forgot=yes',
+	],
+];
+
+?>
+
 <td class="right-collum-index">
-    <!-- <div class="project-folders-menu">
-        <ul class="project-folders-v">
-            <li class="project-folders-v-active"><a href="/?login=yes">Авторизация</a></li>
-            <li><a href="/?registration=yes">Регистрация</a></li>
-            <li><a href="#">Забыли пароль?</a></li>
-        </ul>
-        <div class="clearfix"></div>
-    </div> -->
     <?php 
     if (isLogin()) {
         // if (isset($_GET['login'])) require_once ($serverRootPath . AUTH_BLOCK);
@@ -15,14 +29,22 @@
         ?>
         <div class="project-folders-menu">
             <ul class="project-folders-v">
-                <li class="project-folders-v-active"><a href="/?login=yes">Авторизация</a></li>
-                <li><a href="/?registration=yes">Регистрация</a></li>
-                <li><a href="/?forgot=yes">Забыли пароль?</a></li>
+                <?php
+                foreach ($menuArrRigthBar as $key => $value) {
+                    $curId = $value['id'];
+                    $curTitle = $value['title'];
+                    $curPath = $value['path'];
+                    $curClass = ( array_key_first($_GET) == $curId || ($curId == 'login' && empty($_GET)) ) ? 'project-folders-v-active' : '';
+                    ?> 
+
+                    <li class="<?=$curClass?>"><a href=<?=$curPath?>><?=$curTitle?></a></li> 
+                    <?php
+                }
+                ?>
             </ul>
             <div class="clearfix"></div>
         </div>
-        <? 
-        // require_once ($serverRootPath . AUTH_BLOCK);
+        <?php
         if (isset($_GET['login'])) {
             require_once ($serverRootPath . AUTH_BLOCK);
         } elseif(isset($_GET['registration'])) {
