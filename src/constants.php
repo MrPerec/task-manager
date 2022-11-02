@@ -9,6 +9,7 @@ define('HEADER', '/templates/header.php');
 define('RIGHT_COLUMN', '/templates/right_column.php');
 define('AUTH_BLOCK', '/templates/auth.php');
 define('REGISTER_BLOCK', '/templates/register.php');
+define('FORGOT_BLOCK', '/templates/forgot.php');
 define('FOOTER', '/templates/footer.php');
 
 define('SUCC_MSG', '/include/success_message.php');
