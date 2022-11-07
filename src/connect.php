@@ -7,29 +7,39 @@
 
 function connect()
 {
-    static $connect = null;
+    static $dbh = null;
     
-    if ($connect == null) {
-
+    if ($dbh == null) {
         $host = $_SERVER['HTTP_HOST']; 
         $user = 'root'; 
         $password = ''; 
-        $dsn = 'mysql:host=localhost;dbname=homeWork20';
+        $dsn = 'mysql:host=localhost;dbname=home_work_20';
+        
+        try {
+            $dbh = new PDO($dsn, $user, $password, array(
+                PDO::ATTR_PERSISTENT => true
+            ));
 
-        $connect = new PDO($dsn, $user, $password) or die('connect Error');
+            $stmt = $dbh->query(
+                "SELECT users.surname as 'Фамилия', users.name 'Имя', 
+                    users.middle_name as 'Отчество', 
+                    users.login as 'Логин', 
+                    passwords.password as 'Пароль'
+                        FROM `home_work_20`.`users`
+                            LEFT JOIN passwords ON users.id = passwords.user_id;"
+                );
 
-        /* //шаблон запроса
-        $stmt = $pdo->prepare('INSERT INTO stock(name) VALUES(:name)');
-        //используем шаблон запрос на добавление склада
-        $stmt->execute([':name' => 'Склад 1']); */
+            var_dump($stmt->fetch());
+            // while ($row = $stmt->fetch()) {
+            // echo $row . "<br>";
+            // }
 
-        // $stmt = $pdo->query('SELECT * FROM stock');
-
-        /* while ($row = $stmt->fetch()) {
-            echo $row['name'] . "<br>";
-        } */
+            $dbh = null;
+        } catch (PDOException $e) {
+            print "Error!: " . $e->getMessage() . "<br/>";
+            die();
+        }
     } 
 
-    var_dump($connect);
-    return $connect;
+    return $dbh;
 }
