@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_GET['register'])) {
-    connect();
+    define("MIN_PASS_LENGTH", 6);
 
     /* try {
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -18,32 +18,45 @@ if (isset($_GET['register'])) {
       } */
 }
 
-// добавить сравнение полей пароль и подтверждения
-//пароль должен быть не менее 6 знаков
-define("MIN_PASS_LENGTH", 6);
 
-if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['password_confirm'])) {
+/* if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['password_confirm'])) {
     if (strlen($_POST['password']) >= MIN_PASS_LENGTH && strlen($_POST['password_confirm']) >= MIN_PASS_LENGTH) {
         if (!strcmp($_POST['password'], $_POST['password_confirm'])) {
             echo 'Пароли совпадают.';
-            // $dbh 
-            //     -> prepare("SELECT users.surname as 'Фамилия', users.name 'Имя', 
-            //                         users.middle_name as 'Отчество', 
-            //                         users.login as 'Логин', 
-            //                         passwords.password as 'Пароль'
-            //                             FROM `home_work_20`.`users`
-            //                                 LEFT JOIN passwords ON users.id = passwords.user_id;") 
-            //     -> execute();
+            
 
-                
+
         } else {
             echo 'Пароли не совпадают.';
         }
     } else {
         echo 'Длина пароля должна быть минимум 6 знаков.';
     }
-}
+} */
 
+//простой запрос
+/* $stmt = connect()->query(
+    "SELECT * FROM `home_work_20`.`users`
+        LEFT JOIN passwords ON users.id = passwords.user_id;"
+    );
+
+// var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
+
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    var_dump("$row[surname] $row[name] $row[middle_name] $row[login] $row[password]");
+} */
+
+
+//Пример использования подготовленных запросов в PHP PDO:
+$stmt = connect()->prepare("SELECT * FROM `home_work_20`.`users` 
+                            LEFT JOIN passwords ON users.id = :id");
+
+$id = 'passwords.user_id';
+$stmt->execute([':id' => $id]);
+
+var_dump($stmt->fetchAll(PDO::FETCH_OBJ));
+
+$stmt = null;
 ?>
 
 <div class="index-auth">
