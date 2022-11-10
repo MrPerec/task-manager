@@ -1,7 +1,5 @@
 <?php
 
-define("MIN_PASS_LENGTH", 6);
-
 /* try {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
@@ -14,23 +12,45 @@ define("MIN_PASS_LENGTH", 6);
     $dbh->rollBack();
     echo "Ошибка: " . $e->getMessage();
 } */
-var_dump($_POST);
+// var_dump($_POST);
+
+/* $hash = password_hash("rasmuslerdorf", PASSWORD_DEFAULT);
+var_dump($hash);
+var_dump(password_verify('rasmuslerdorf', $hash)); */
 
 if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['password_confirm'])) {
     if (strlen($_POST['password']) >= MIN_PASS_LENGTH && strlen($_POST['password_confirm']) >= MIN_PASS_LENGTH) {
         if (!strcmp($_POST['password'], $_POST['password_confirm'])) {
-            echo 'Пароли совпадают.';
-            connect()->prepare("INSERT INTO `home_work_20`.`users` (login, surname, name, middle_name) 
-                            VALUES (?, ?, ?, ?);")
-                    ->execute($_POST['login'], $_POST['surname'], $_POST['name'], $_POST['middle_name'])
-                    ->prepare("INSERT INTO `home_work_20`.`password` ('password', 'user_id') 
-                            VALUES (?, ?);")
-                    ->execute($_POST['login'], 3);
+            connect()->prepare("INSERT INTO `home_work_20`.`users`(surname, name, middle_name, login) VALUES (:surname, :name, :middle_name, :login)")
+                    ->execute([
+                        ':surname' => $_POST['surname'],
+                        ':name' => $_POST['name'],
+                        ':middle_name' => $_POST['middle_name'],
+                        ':login' => $_POST['login'], 
+                    ]);
+
+            $lastUserId = connect()->lastInsertId();
+            $hashUserPasswd = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+            // connect()->prepare("INSERT INTO `home_work_20`.`passwords`(password, user_id) VALUES (:password, :user_id)")
+            //         ->execute([
+            //             ':password' => $hashUserPasswd,
+            //             ':user_id' => $lastUserId, 
+            //         ]);
+            connect()->prepare("INSERT INTO `home_work_20`.`passwords`(password, user_id) VALUES (?, ?)")
+                    ->execute([
+                        $hashUserPasswd,
+                        $lastUserId, 
+                    ]);
+
+            $lastUserId = null;
+
+            include_once $serverRootPath . REG_SUCC_MSG;
         } else {
-            echo 'Пароли не совпадают.';
+            include_once $serverRootPath . REG_PASS_MATCH_ERR_MSG;
         }
     } else {
-        echo 'Длина пароля должна быть минимум 6 знаков.';
+        include_once $serverRootPath . REG_PASS_LENGTH_ERR_MSG;
     }
 }
 
@@ -55,7 +75,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['passwor
 
 // var_dump($stmt->fetchAll(PDO::FETCH_OBJ));
 
-$stmt = null;
+
 ?>
 
 <div class="index-auth">

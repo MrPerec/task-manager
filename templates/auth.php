@@ -22,5 +22,5 @@
             </tr>
         </table>
     </form>
-    <?php if (!empty($_POST)) isLogin() ? include_once $serverRootPath . SUCC_MSG : include_once $serverRootPath . ERR_MSG; ?>
+    <?php if (!empty($_POST)) isLogin() ? include_once $serverRootPath . AUTH_SUCC_MSG : include_once $serverRootPath . AUTH_ERR_MSG; ?>
 </div>

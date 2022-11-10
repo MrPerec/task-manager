@@ -12,8 +12,12 @@ define('REGISTER_BLOCK', '/templates/register.php');
 define('FORGOT_BLOCK', '/templates/forgot.php');
 define('FOOTER', '/templates/footer.php');
 
-define('SUCC_MSG', '/include/success_message.php');
-define('ERR_MSG', '/include/error_message.php');
+define('AUTH_SUCC_MSG', '/include/auth_success_message.php');
+define('AUTH_ERR_MSG', '/include/auth_error_message.php');
+define('REG_SUCC_MSG', '/include/registr_success_message.php');
+define('REG_PASS_MATCH_ERR_MSG', '/include/registr_pass_match_error_message.php');
+define('REG_PASS_LENGTH_ERR_MSG', '/include/registr_pass_length_error_message.php');
+
 define('ABOUT_PAGE', '/include/about.php');
 define('CONTACTS_PAGE', '/include/contacts.php');
 define('NEWS_PAGE', '/include/news.php');
@@ -35,4 +39,5 @@ define('UPLOAD_DIR', '/upload/');
 
 define('EXTENSIONS', ['jpg', 'jpeg', 'png', 'gif', 'bmp']);
 
+define("MIN_PASS_LENGTH", 6);
 ?>

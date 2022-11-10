@@ -16,12 +16,10 @@ function connect()
         $dsn = 'mysql:host=localhost;dbname=home_work_20';
         
         try {
-            $dbh = new PDO($dsn, $user, $password, array(
-                PDO::ATTR_PERSISTENT => true
-            ));
-        } catch (PDOException $e) {
+            $dbh = new PDO($dsn, $user, $password, [PDO::ATTR_PERSISTENT => true]);
+        } catch (PDOException $error) {
             die();
-            echo "Error!: " . $e->getMessage() . "<br/>";
+            echo "Error!: " . $error->getMessage() . "<br/>";
         }
     } 
 
