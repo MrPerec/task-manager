@@ -1,16 +1,32 @@
 <?php
 
+/* $hash = password_hash("rasmuslerdorf", PASSWORD_DEFAULT);
+var_dump($hash);
+var_dump(password_verify('rasmuslerdorf', $hash)); */
+
 require_once ($serverRootPath . CORE);
 
 session_start();
 
 if (isset($_POST['login']) && isset($_POST['password'])) {
-    include_once $serverRootPath . USERS;
+    /* include_once $serverRootPath . USERS;
     include_once $serverRootPath . PASSWORDS;
 
     if ((in_array($_POST['login'], $users) && in_array($_POST['password'], $passwords)) && (array_flip($users)[$_POST['login']] == array_flip($passwords)[$_POST['password']])) {
         $_SESSION['isAuthorized'] = true;
-    } 
+    } */
+    var_dump($_POST['login']);
+    var_dump($_POST['password']);
+    
+    $stmt = connect()->prepare("SELECT users.login, passwords.password 
+                                FROM `home_work_20`.`users` AS users 
+                                INNER JOIN `home_work_20`.`passwords` AS passwords ON users.id = passwords.user_id
+                                    WHERE users.login = ? AND passwords.password = ?");
+    // $stmt->execute(['testtt', '111111']);
+    $stmt->execute([$_POST['login'], $_POST['password']]);
+
+    // var_dump($stmt->fetch());
+    var_dump($stmt->fetch(PDO::FETCH_ASSOC));
 }
 
 if (islogin()) {

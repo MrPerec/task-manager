@@ -14,7 +14,6 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['passwor
 
             $lastUserId = null;
             include_once $serverRootPath . REG_SUCC_MSG;
-           
         } else {
             include_once $serverRootPath . REG_PASS_MATCH_ERR_MSG;
         }
