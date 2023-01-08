@@ -14,7 +14,7 @@ function getTitle(array $array = [], string $key = 'title') : string
     $searchedUri = $_SERVER['REQUEST_URI'];
 
     foreach ($array as $value) {
-        if ( array_search($searchedUri, $value) && isLogin()) {
+        if ( array_search($searchedUri, $value) ) {
             return $value[$key];
         }
     }

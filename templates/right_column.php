@@ -1,13 +1,15 @@
 <td class="right-collum-index">
     <div class="project-folders-menu">
         <ul class="project-folders-v">
-            <?php foreach ($rightBarMenu as $value) {
-                $curTitle = $value['title'];
-                $curPath = $value['path'];
-                $curClass = getTitle($rightBarMenu) == $curTitle ? 'project-folders-v-active' : '';
-                
-                ?> <li class="<?=$curClass?>"><a href=<?=$curPath?>><?=$curTitle?></a></li> <?php
-            } ?>
+            <?php 
+                foreach ($rightBarMenu as $value) {
+                    $curTitle = $value['title'];
+                    $curPath = $value['path'];
+                    $curClass = getTitle($rightBarMenu) == $curTitle ? 'project-folders-v-active' : '';
+                    
+                    ?> <li class="<?=$curClass?>"><a href=<?=$curPath?>><?=$curTitle?></a></li> <?php
+                } 
+            ?>
         </ul>
         <div class="clearfix"></div>
     </div>

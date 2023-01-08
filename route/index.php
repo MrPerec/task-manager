@@ -10,9 +10,9 @@ require_once ($serverRootPath . HEADER);
 <table width="100%" cellspacing="0" cellpadding="0">
     <tr>
         <td class="left-collum-index">
-            <h1><?=getTitle($leftBarMenu)?></h1>
             <?php
             if (isLogin()) {
+                ?><h1><?=getTitle($leftBarMenu)?></h1><?php
                 if ($uri == URI_ABOUT) {
                     include ($serverRootPath . ABOUT_PAGE);
                 } elseif ($uri == URI_CONTACTS) {
@@ -29,6 +29,7 @@ require_once ($serverRootPath . HEADER);
                     include ($serverRootPath . MAIN_PAGE);
                 }
             } else {
+                ?><h1><?=$leftBarMenu[array_key_first($leftBarMenu)]['title']?></h1><?php
                 include ($serverRootPath . MAIN_PAGE);
                 include ($serverRootPath . RIGHT_COLUMN);
             }
