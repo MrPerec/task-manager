@@ -25,6 +25,8 @@ require_once ($serverRootPath . HEADER);
                     include ($serverRootPath . OPPORTUNITY_PAGE);
                 } elseif ($uri == URI_GALLERY) {
                     include ($serverRootPath . GALLERY_PAGE);
+                } elseif ($uri == URI_PROFILE) {
+                    include ($serverRootPath . PROFILE_PAGE);
                 } else {
                     include ($serverRootPath . MAIN_PAGE);
                 }

@@ -26,6 +26,7 @@ define('GALLERY_CREATE', '/include/gallery_create.php');
 define('MAIN_PAGE', '/include/main.php');
 define('NEWS_PAGE', '/include/news.php');
 define('OPPORTUNITY_PAGE', '/include/opportunity.php');
+define('PROFILE_PAGE', '/include/profile.php');
 
 define('URI_ABOUT', '/route/about/');
 define('URI_CONTACTS', '/route/contacts/');

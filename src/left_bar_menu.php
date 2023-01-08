@@ -36,4 +36,9 @@ $leftBarMenu = [
 		'path' => '/route/gallery/',
 		'sort' => 6,
 	],
+	[
+		'title' => 'Профиль',
+		'path' => '/route/profile/',
+		'sort' => 7,
+	],
 ];
