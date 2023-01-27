@@ -41,4 +41,9 @@ $leftBarMenu = [
 		'path' => '/route/profile/',
 		'sort' => 7,
 	],
+	[
+		'title' => 'Сообщения',
+		'path' => '/route/posts/',
+		'sort' => 8,
+	],
 ];

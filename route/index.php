@@ -27,6 +27,8 @@ require_once ($serverRootPath . HEADER);
                     include ($serverRootPath . GALLERY_PAGE);
                 } elseif ($uri == URI_PROFILE) {
                     include ($serverRootPath . PROFILE_PAGE);
+                } elseif ($uri == URI_POSTS) {
+                    include ($serverRootPath . POSTS_PAGE);
                 } else {
                     include ($serverRootPath . MAIN_PAGE);
                 }

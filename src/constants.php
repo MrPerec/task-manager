@@ -27,6 +27,7 @@ define('MAIN_PAGE', '/include/main.php');
 define('NEWS_PAGE', '/include/news.php');
 define('OPPORTUNITY_PAGE', '/include/opportunity.php');
 define('PROFILE_PAGE', '/include/profile.php');
+define('POSTS_PAGE', '/include/posts.php');
 
 define('URI_ABOUT', '/route/about/');
 define('URI_CONTACTS', '/route/contacts/');
@@ -36,6 +37,7 @@ define('URI_MAIN', '/route/main/');
 define('URI_NEWS', '/route/news/');
 define('URI_OPPORTUNITY', '/route/opportunity/');
 define('URI_PROFILE', '/route/profile/');
+define('URI_POSTS', '/route/posts/');
 
 define('UPLOAD_DIR', '/upload/');
 
