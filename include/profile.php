@@ -1,26 +1,41 @@
 <?php
+$userId = $_SESSION['id'];
 
-// connect()->prepare("INSERT INTO `home_work_20`.`users`(surname, name, middle_name, login) VALUES (?, ?, ?, ?)")
-//         ->execute([$_POST['surname'], $_POST['name'], $_POST['middle_name'], $_POST['login']]);
+$selectGetUserData = 'SELECT surname, `name`, middle_name, email
+                      from `home_work_20`.`users` users
+                      where users.id = ?';
 
-// $lastUserId = connect()->lastInsertId();
-// $hashUserPasswd = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$selectGetUserPhone = 'SELECT phone from `home_work_20`.`phones` phones where user_id = ?';
 
-// connect()->prepare("INSERT INTO `home_work_20`.`passwords`(password, user_id) VALUES (?, ?)")
-//         ->execute([$hashUserPasswd, $lastUserId]);
+$selectGetUserGroup = 'SELECT `group` from `home_work_20`.`groups` grps
+                        JOIN `home_work_20`.`users_groups` usrgrs ON usrgrs.group_id = grps.id 
+                        where usrgrs.user_id = ?';
 
-// $lastUserId = null;
+$userData = getData($selectGetUserData, $userId);
+$userData = $userData[array_key_first($userData)];
 
-echo('Делаю какой-то запрос к БД...');
+$userPhone = getData($selectGetUserPhone, $userId);
+$userGroup = getData($selectGetUserGroup, $userId);
 
 ?>
 
-<p>Эта страица отображает информацию о <b>пользователе</b></p>
+<h4>Общая информация пользователя:</h4>
+<p><b>Ф. И. О.:</b> <?=$userData['surname']?> <?=$userData['name']?> <?=$userData['middle_name']?></p>
+<p><b>Почтовый адрес:</b> <?=$userData['email']?></p>
 <li>
-  Отображаемая информация
-  <ol>Ф. И. О.</ol>
-  <ol>email</ol>
-  <ol>телефон текущего авторизованного пользователя в виде списка</ol>
-  <ol>названия всех групп, к которым он привязан</ol>
+  <b>Контактный номер телефона:</b>
+  <?php
+    foreach ($userPhone as $phone) {?>
+      <ol><?=$phone['phone']?></ol>
+    <?}
+  ?>
+</li>
+<li>
+  <b>Группы:</b>
+  <?php
+    foreach ($userGroup as $group) {?>
+      <ol><?=$group['group']?></ol>
+    <?}
+  ?>
 </li>
 </td>
