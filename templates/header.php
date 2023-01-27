@@ -5,17 +5,20 @@ require_once ($serverRootPath . CORE);
 session_start();
 
 if (isset($_POST['login']) && isset($_POST['password'])) {
-    $stmt = connect()->prepare("SELECT users.id, users.login, passwords.password 
-                                FROM `home_work_20`.`users` AS users 
-                                    INNER JOIN `home_work_20`.`passwords` AS passwords ON users.id = passwords.user_id
-                                        WHERE users.login = ?");
-    $stmt->execute([$_POST['login']]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $selectGetUserAuthData = "SELECT users.id, users.login, passwords.password 
+                            FROM `home_work_20`.`users` AS users 
+                            INNER JOIN `home_work_20`.`passwords` AS passwords ON users.id = passwords.user_id
+                            WHERE users.login = ?";
+
+    $result = getData($selectGetUserAuthData, $_POST['login']);
     
-    // if ($result && password_verify($_POST['password'], $result['password'])) $_SESSION['isAuthorized'] = true; 
-    if ($result && password_verify($_POST['password'], $result['password'])){
-        $_SESSION['isAuthorized'] = true; 
-        $_SESSION['id'] = $result['id']; 
+    if ($result) {
+        $result = $result[array_key_first($result)];
+
+        if (password_verify($_POST['password'], $result['password'])) {
+            $_SESSION['isAuthorized'] = true; 
+            $_SESSION['id'] = $result['id']; 
+        }
     } 
 }
 
@@ -37,11 +40,6 @@ if (isset($_GET["logout"])) {
     setcookie(session_name(), '', time() - 42000);
     session_destroy();
 }
-
-var_dump($_POST);
-var_dump($_GET);
-var_dump($_SESSION);
-var_dump($_COOKIE);
 
 ?>
 
