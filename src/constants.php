@@ -28,6 +28,7 @@ define('NEWS_PAGE', '/include/news.php');
 define('OPPORTUNITY_PAGE', '/include/opportunity.php');
 define('PROFILE_PAGE', '/include/profile.php');
 define('POSTS_PAGE', '/include/posts.php');
+define('ADD_POST_PAGE', '/include/add_post.php');
 
 define('URI_ABOUT', '/route/about/');
 define('URI_CONTACTS', '/route/contacts/');
@@ -38,6 +39,7 @@ define('URI_NEWS', '/route/news/');
 define('URI_OPPORTUNITY', '/route/opportunity/');
 define('URI_PROFILE', '/route/profile/');
 define('URI_POSTS', '/route/posts/');
+define('URI_ADD_POSTS', '/route/posts/add');
 
 define('UPLOAD_DIR', '/upload/');
 

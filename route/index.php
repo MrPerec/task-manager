@@ -29,6 +29,8 @@ require_once ($serverRootPath . HEADER);
                     include ($serverRootPath . PROFILE_PAGE);
                 } elseif ($uri == URI_POSTS) {
                     include ($serverRootPath . POSTS_PAGE);
+                } elseif ($uri == URI_ADD_POSTS) {
+                    include ($serverRootPath . ADD_POST_PAGE);
                 } else {
                     include ($serverRootPath . MAIN_PAGE);
                 }
