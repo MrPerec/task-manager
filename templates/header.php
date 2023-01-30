@@ -10,14 +10,30 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
                             INNER JOIN `home_work_20`.`passwords` AS passwords ON users.id = passwords.user_id
                             WHERE users.login = ?";
 
-    $result = getData($selectGetUserAuthData, $_POST['login']);
+    $userAuthData = getData($selectGetUserAuthData, $_POST['login']);
     
-    if ($result) {
-        $result = $result[array_key_first($result)];
+    if ($userAuthData) {
+        $userAuth = $userAuthData[array_key_first($userAuthData)];
 
-        if (password_verify($_POST['password'], $result['password'])) {
+        if (password_verify($_POST['password'], $userAuth['password'])) {
             $_SESSION['isAuthorized'] = true; 
-            $_SESSION['id'] = $result['id']; 
+
+            $selectGetUserNameData = 'SELECT surname, `name`, middle_name, email
+                                        from `home_work_20`.`users` users
+                                        where users.id = ?';
+
+            $selectGetUserPhoneData = 'SELECT phone from `home_work_20`.`phones` phones where user_id = ?';
+
+            $selectGetUserGroupData = 'SELECT `group` from `home_work_20`.`groups` grps
+                                        JOIN `home_work_20`.`users_groups` usrgrs ON usrgrs.group_id = grps.id 
+                                        where usrgrs.user_id = ?';
+
+            $userNameData = getData($selectGetUserNameData, $userAuth['id']);
+            $userName = $userNameData[array_key_first($userNameData)];
+
+            $_SESSION['userName'] = $userName;
+            $_SESSION['userPhone'] = getData($selectGetUserPhoneData, $userAuth['id']);
+            $_SESSION['userGroup'] = getData($selectGetUserGroupData, $userAuth['id']);
         }
     } 
 }

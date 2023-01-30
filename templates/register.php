@@ -26,7 +26,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['passwor
 
 <div class="index-auth">
     <h3>Для регистрации на сайте заполните поля</h3>
-    <form action="?register=yes" name="test" method="post">
+    <form action="?register=yes" name="register" method="post">
         <table width="100%" cellspacing="0" cellpadding="0">
             <tr>
                 <td class="iat">

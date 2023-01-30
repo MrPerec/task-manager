@@ -8,9 +8,9 @@
  * @return array результат запроса
  */
 
-function getData(string $query, $queryParam) : array
+function getData(string $sqlQuery, $queryParam) : array
 {
-    $stmt = connect()->prepare($query);
+    $stmt = connect()->prepare($sqlQuery);
     $stmt->execute([$queryParam]);
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
