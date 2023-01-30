@@ -12,15 +12,15 @@ foreach ($_SESSION['userGroup'] as $group) {
   ?>
   <p><a class='message-link_cursor-pointer' href=<?=URI_ADD_POSTS?>>Написать сообщение</a></p>
   <li><b>Непрочитанные</b>
-    <ul><a class='message-link_cursor-pointer'>Сообщение 1</a></ul>
-    <ul><a class='message-link_cursor-pointer'>Сообщение 2</a></ul>
-    <ul><a class='message-link_cursor-pointer'>Сообщение 3</a></ul>
+    <ul><a class='message-link_cursor-pointer'>Заголовок сообщения и название раздела 1</a></ul>
+    <ul><a class='message-link_cursor-pointer'>Заголовок сообщения и название раздела 2</a></ul>
+    <ul><a class='message-link_cursor-pointer'>Заголовок сообщения и название раздела 3</a></ul>
   </li>
   
   <li><b>Прочитанные</b>
-    <ul><a class='message-link_cursor-pointer'>Сообщение 1</a></ul>
-    <ul><a class='message-link_cursor-pointer'>Сообщение 2</a></ul>
-    <ul><a class='message-link_cursor-pointer'>Сообщение 3</a></ul>
+    <ul><a class='message-link_cursor-pointer'>Заголовок сообщения и название раздела 1</a></ul>
+    <ul><a class='message-link_cursor-pointer'>Заголовок сообщения и название раздела 2</a></ul>
+    <ul><a class='message-link_cursor-pointer'>Заголовок сообщения и название раздела 3</a></ul>
   </li>
 
   <?

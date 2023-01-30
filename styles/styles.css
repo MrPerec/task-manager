@@ -203,7 +203,7 @@ a:hover {
 }
 
 .iat input {
-  width: 90% !important;
+  width: 90%;
   margin-top: 5px;
 }
 
@@ -247,4 +247,12 @@ a:hover {
 
 .message-link_cursor-pointer {
   cursor: pointer;
+}
+
+.post_container {
+  width: 25vw !important;
+}
+
+.post-textarea_container {
+  height: 20vh;
 }
