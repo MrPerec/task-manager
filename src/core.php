@@ -6,6 +6,7 @@ include 'getTitle.php';
 include 'showMenu.php';
 include 'convertFileSize.php';
 include 'isLogin.php';
+include 'isWriter.php';
 include 'connect.php';
 include 'getData.php';
 
