@@ -256,3 +256,14 @@ a:hover {
 .post-textarea_container {
   height: 20vh;
 }
+
+.flex-box {
+  justify-content: space-evenly;
+  display: flex;
+}
+.text-color-red {
+  color: red;
+}
+.text-color-green {
+  color: green;
+}
