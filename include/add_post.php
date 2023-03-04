@@ -1,23 +1,13 @@
 <?php
 
-$selectGetUsersList = "SELECT CONCAT(surname, ' ', name, ' ', middle_name) as `user` 
-                      FROM `home_work_20`.`users` 
-                      where surname != ''";
+$selectGetUsersWritersData = "select CONCAT(surname, ' ', name, ' ', middle_name) as `users_writers` from `home_work_20`.`users` usrs
+                        JOIN `home_work_20`.`users_groups` usrsgrps ON usrs.id = usrsgrps.user_id 
+                        JOIN `home_work_20`.`groups` grps ON usrsgrps.group_id = grps.id
+                        where grps.group = 'writer'
+                        order by 1";
 
-// $usersListData = getData($selectGetUsersList, '');
+$usersWritersData = getData($selectGetUsersWritersData);
 
-// var_dump($usersListData);
-
-$stmt = connect()->prepare($selectGetUsersList);
-$stmt->execute([null]);
-
-// $pdo = new PDO();
-// $pdo 
-// -> connect()-> prepare($selectGetUsersList) 
-// -> execute();
-foreach ($stmt as $row) {
-  var_dump($row);
-}
 ?>
 
 <form action="?add_post=yes" name="add_post" method="post">
@@ -38,11 +28,14 @@ foreach ($stmt as $row) {
       <td class="iat">
           <label for="to_user">Пользователь:</label>
           <select name="to_user" value="">
-            <option disabled>Выберите пользователя</option>
-            <option selected value="Пользователь1">Пользователь1</option>
-            <option value="Пользователь2">Пользователь2</option>
-            <option value="Пользователь3">Пользователь3</option>
-            <option value="Пользователь4">Пользователь4</option>
+            <?php
+              foreach ($usersWritersData as $userWriter) {
+                $userWriter = $userWriter['users_writers']
+                ?>
+                <option value=<?=$userWriter?>><?=$userWriter?></option>
+                <?
+              }
+            ?>
           </select>
       </td>
     </tr>
