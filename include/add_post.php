@@ -4,9 +4,13 @@ $selectGetUsersWritersData = "select CONCAT(surname, ' ', name, ' ', middle_name
                         JOIN `home_work_20`.`users_groups` usrsgrps ON usrs.id = usrsgrps.user_id 
                         JOIN `home_work_20`.`groups` grps ON usrsgrps.group_id = grps.id
                         where grps.group = 'writer'
+                        and usrs.id != ?
                         order by 1";
 
-$usersWritersData = getData($selectGetUsersWritersData);
+$selectSectionsData = "SELECT section FROM home_work_20.sections;";
+
+$usersWritersData = getData($selectGetUsersWritersData, $_SESSION['userId']);
+$sectionsData = getData($selectSectionsData);
 
 ?>
 
@@ -26,8 +30,8 @@ $usersWritersData = getData($selectGetUsersWritersData);
     </tr>
     <tr>
       <td class="iat">
-          <label for="to_user">Пользователь:</label>
-          <select name="to_user" value="">
+          <label for="send_to">Пользователь:</label>
+          <select name="send_to" value="">
             <?php
               foreach ($usersWritersData as $userWriter) {
                 $userWriter = $userWriter['users_writers']
@@ -43,11 +47,14 @@ $usersWritersData = getData($selectGetUsersWritersData);
       <td class="iat">
           <label for="message_section">Раздел сообщения:</label>
           <select name="message_section" value="">
-            <option disabled>Выберите раздел</option>
-            <option selected value="Раздел1">Раздел1</option>
-            <option value="Раздел2">Раздел2</option>
-            <option value="Раздел3">Раздел3</option>
-            <option value="Раздел4">Раздел4</option>
+          <?php
+              foreach ($sectionsData as $section) {
+                $section = $section['section']
+                ?>
+                <option value=<?=$section?>><?=$section?></option>
+                <?
+              }
+            ?>
           </select>
       </td>
     </tr>
