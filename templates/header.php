@@ -14,13 +14,15 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     
     if ($userAuthData) {
         $userAuth = $userAuthData[array_key_first($userAuthData)];
+        $userAuthPasswd = $userAuth['password'];
+        $userAuthId = $userAuth['id'];
 
-        if (password_verify($_POST['password'], $userAuth['password'])) {
+        if (password_verify($_POST['password'], $userAuthPasswd)) {
             $_SESSION['isAuthorized'] = true; 
 
-            $selectGetUserNameData = 'SELECT surname, `name`, middle_name, email
+            $selectGetUserNameData = "SELECT CONCAT(surname, ' ', name, ' ', middle_name) as `name`, email
                                         from `home_work_20`.`users` users
-                                        where users.id = ?';
+                                        where users.id = ?";
 
             $selectGetUserPhoneData = 'SELECT phone from `home_work_20`.`phones` phones where user_id = ?';
 
@@ -28,12 +30,13 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
                                         JOIN `home_work_20`.`users_groups` usrgrs ON usrgrs.group_id = grps.id 
                                         where usrgrs.user_id = ?';
 
-            $userNameData = getData($selectGetUserNameData, $userAuth['id']);
+            $userNameData = getData($selectGetUserNameData, $userAuthId);
             $userName = $userNameData[array_key_first($userNameData)];
 
+            $_SESSION['userId'] = $userAuthId;
             $_SESSION['userName'] = $userName;
-            $_SESSION['userPhone'] = getData($selectGetUserPhoneData, $userAuth['id']);
-            $_SESSION['userGroup'] = getData($selectGetUserGroupData, $userAuth['id']);
+            $_SESSION['userPhone'] = getData($selectGetUserPhoneData, $userAuthId);
+            $_SESSION['userGroup'] = getData($selectGetUserGroupData, $userAuthId);
         }
     } 
 }

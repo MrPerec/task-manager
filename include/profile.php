@@ -1,4 +1,4 @@
-<p><b>Ф. И. О.:</b> <?=$_SESSION['userName']['surname']?> <?=$_SESSION['userName']['name']?> <?=$_SESSION['userName']['middle_name']?></p>
+<p><b>Ф. И. О.:</b> <?=$_SESSION['userName']['name']?></p>
 <p><b>Почтовый адрес:</b> <?=$_SESSION['userName']['email']?></p>
 <li>
   <b>Контактный номер телефона:</b>
