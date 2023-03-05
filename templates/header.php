@@ -10,7 +10,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
                             INNER JOIN `home_work_20`.`passwords` AS passwords ON users.id = passwords.user_id
                             WHERE users.login = ?";
 
-    $userAuthData = getData($selectGetUserAuthData, $_POST['login']);
+    $userAuthData = sendQueryDB($selectGetUserAuthData, [$_POST['login']])['responseData'];
     
     if ($userAuthData) {
         $userAuth = $userAuthData[array_key_first($userAuthData)];
@@ -30,13 +30,13 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
                                         JOIN `home_work_20`.`users_groups` usrgrs ON usrgrs.group_id = grps.id 
                                         where usrgrs.user_id = ?';
 
-            $userNameData = getData($selectGetUserNameData, $userAuthId);
+            $userNameData = sendQueryDB($selectGetUserNameData, [$userAuthId])['responseData'];
             $userName = $userNameData[array_key_first($userNameData)];
 
             $_SESSION['userId'] = $userAuthId;
             $_SESSION['userName'] = $userName;
-            $_SESSION['userPhone'] = getData($selectGetUserPhoneData, $userAuthId);
-            $_SESSION['userGroup'] = getData($selectGetUserGroupData, $userAuthId);
+            $_SESSION['userPhone'] = sendQueryDB($selectGetUserPhoneData, [$userAuthId])['responseData'];
+            $_SESSION['userGroup'] = sendQueryDB($selectGetUserGroupData, [$userAuthId])['responseData'];
         }
     } 
 }

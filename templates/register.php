@@ -3,14 +3,15 @@
 if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['password_confirm'])) {
     if (strlen($_POST['password']) >= MIN_PASS_LENGTH && strlen($_POST['password_confirm']) >= MIN_PASS_LENGTH) {
         if (!strcmp($_POST['password'], $_POST['password_confirm'])) {
-            connect()->prepare('INSERT INTO `home_work_20`.`users`(surname, name, middle_name, login) VALUES (?, ?, ?, ?)')
-                    ->execute([$_POST['surname'], $_POST['name'], $_POST['middle_name'], $_POST['login']]);
+            
+            $insertUserQuery = 'INSERT INTO `home_work_20`.`users`(surname, name, middle_name, login) VALUES (?, ?, ?, ?)';
+            $userDataParam = [$_POST['surname'], $_POST['name'], $_POST['middle_name'], $_POST['login']];
 
-            $lastUserId = connect()->lastInsertId();
+            $lastUserId = sendQueryDB($insertUserQuery, $userDataParam)['lastInsertId'];
             $hashUserPasswd = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            connect()->prepare('INSERT INTO `home_work_20`.`passwords`(password, user_id) VALUES (?, ?)')
-                    ->execute([$hashUserPasswd, $lastUserId]);
+            $insertPasswordQuery = 'INSERT INTO `home_work_20`.`passwords`(password, user_id) VALUES (?, ?)';
+            sendQueryDB($insertPasswordQuery, [$hashUserPasswd, $lastUserId]);
 
             $lastUserId = null;
             include_once $serverRootPath . REG_SUCC_MSG;

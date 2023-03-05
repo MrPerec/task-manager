@@ -7,10 +7,14 @@ $selectGetUsersWritersData = "select CONCAT(surname, ' ', name, ' ', middle_name
                         and usrs.id != ?
                         order by 1";
 
-$selectSectionsData = "SELECT section FROM home_work_20.sections;";
+$selectSectionsData = "SELECT section FROM home_work_20.sections";
 
-$usersWritersData = getData($selectGetUsersWritersData, $_SESSION['userId']);
-$sectionsData = getData($selectSectionsData);
+$usersWritersData = sendQueryDB($selectGetUsersWritersData, [$_SESSION['userId']])['responseData'];
+$sectionsData = sendQueryDB($selectSectionsData)['responseData'];
+
+$insertMessageData = "insert into `home_work_20`.`messages` (sender_user_id, receiver_user_id, section_id, title, message) 
+            values (?, ?, ?, ?, ?)";
+// sendQueryDB($insertMessageData, [18, 17, 1, 'Тестовое письмо2', 'Это тестовое письмо, пожалуйста не отвечайте на него2']);
 
 ?>
 
