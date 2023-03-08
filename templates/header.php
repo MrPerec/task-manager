@@ -2,6 +2,9 @@
 
 require_once ($serverRootPath . CORE);
 
+var_dump($_GET);
+var_dump($_POST);
+
 session_start();
 
 if (isset($_POST['login']) && isset($_POST['password'])) {

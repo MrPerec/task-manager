@@ -1,46 +1,56 @@
 <?php
 
-$selectGetUsersWritersData = "select CONCAT(surname, ' ', name, ' ', middle_name) as `users_writers` from `home_work_20`.`users` usrs
+$userId = $_SESSION['userId'];
+
+$selectGetUsersWritersData = "select usrs.id, CONCAT(surname, ' ', name, ' ', middle_name) as `users_writers` from `home_work_20`.`users` usrs
                         JOIN `home_work_20`.`users_groups` usrsgrps ON usrs.id = usrsgrps.user_id 
                         JOIN `home_work_20`.`groups` grps ON usrsgrps.group_id = grps.id
                         where grps.group = 'writer'
                         and usrs.id != ?
                         order by 1";
 
-$selectSectionsData = "SELECT section FROM home_work_20.sections";
+$selectSectionsData = "SELECT * FROM home_work_20.sections";
 
-$usersWritersData = sendQueryDB($selectGetUsersWritersData, [$_SESSION['userId']])['responseData'];
+$usersWritersData = sendQueryDB($selectGetUsersWritersData, [$userId])['responseData'];
 $sectionsData = sendQueryDB($selectSectionsData)['responseData'];
 
-$insertMessageData = "insert into `home_work_20`.`messages` (sender_user_id, receiver_user_id, section_id, title, message) 
-            values (?, ?, ?, ?, ?)";
-// sendQueryDB($insertMessageData, [18, 17, 1, 'Тестовое письмо2', 'Это тестовое письмо, пожалуйста не отвечайте на него2']);
+if (isset($_POST['title_text']) && isset($_POST['body_text']) && isset($_POST['receiver_user']) && isset($_POST['message_section'])) {
+  $insertMessageData = "insert into `home_work_20`.`messages` (sender_user_id, receiver_user_id, section_id, title, message) values (?, ?, ?, ?, ?)";
+  
+  $titleText = isset($_POST['title_text']);
+  $bodyText = isset($_POST['body_text']);
+  $receiverUser = isset($_POST['receiver_user']);
+  $messageSection = isset($_POST['message_section']);
+  
+  sendQueryDB($insertMessageData, [$userId, $receiverUser, $messageSection, $titleText, $bodyText]);
+}
 
 ?>
 
-<form action="?add_post=yes" name="add_post" method="post">
+<form action="<?=$uri?>" name="add_post" method="post">
   <table width="100%" cellspacing="0" cellpadding="0">
     <tr>
       <td class="iat">
-          <label for="text_title">Заголовок:</label>
-          <input required class="post_container" size="30" name="text_title" value="">
+          <label for="title_text">Заголовок:</label>
+          <input required class="post_container" size="30" name="title_text">
       </td>
     </tr>
     <tr>
       <td class="iat">
-          <label for="text_body">Текст сообщения:</label>
-          <textarea required class="post_container post-textarea_container" name="text_body" value=""></textarea>
+          <label for="body_text">Текст сообщения:</label>
+          <textarea required class="post_container post-textarea_container" name="body_text"></textarea>
       </td>
     </tr>
     <tr>
       <td class="iat">
-          <label for="send_to">Пользователь:</label>
-          <select name="send_to" value="">
+          <label for="receiver_user">Пользователь:</label>
+          <select name="receiver_user">
             <?php
               foreach ($usersWritersData as $userWriter) {
-                $userWriter = $userWriter['users_writers']
+                $userWriterId = $userWriter['id'];
+                $userWriterName = $userWriter['users_writers'];
                 ?>
-                <option value=<?=$userWriter?>><?=$userWriter?></option>
+                <option value=<?=$userWriterId?>><?=$userWriterName?></option>
                 <?
               }
             ?>
@@ -50,12 +60,13 @@ $insertMessageData = "insert into `home_work_20`.`messages` (sender_user_id, rec
     <tr>
       <td class="iat">
           <label for="message_section">Раздел сообщения:</label>
-          <select name="message_section" value="">
+          <select name="message_section">
           <?php
               foreach ($sectionsData as $section) {
-                $section = $section['section']
+                $sectionId = $section['id'];
+                $sectionName = $section['section'];
                 ?>
-                <option value=<?=$section?>><?=$section?></option>
+                <option value=<?=$sectionId?>><?=$sectionName?></option>
                 <?
               }
             ?>
