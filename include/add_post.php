@@ -1,6 +1,6 @@
 <?php
 
-$userId = $_SESSION['userId'];
+$senderUser = $_SESSION['userId'];
 
 $selectGetUsersWritersData = "select usrs.id, CONCAT(surname, ' ', name, ' ', middle_name) as `users_writers` from `home_work_20`.`users` usrs
                         JOIN `home_work_20`.`users_groups` usrsgrps ON usrs.id = usrsgrps.user_id 
@@ -11,18 +11,18 @@ $selectGetUsersWritersData = "select usrs.id, CONCAT(surname, ' ', name, ' ', mi
 
 $selectSectionsData = "SELECT * FROM home_work_20.sections";
 
-$usersWritersData = sendQueryDB($selectGetUsersWritersData, [$userId])['responseData'];
+$usersWritersData = sendQueryDB($selectGetUsersWritersData, [$senderUser])['responseData'];
 $sectionsData = sendQueryDB($selectSectionsData)['responseData'];
 
 if (isset($_POST['title_text']) && isset($_POST['body_text']) && isset($_POST['receiver_user']) && isset($_POST['message_section'])) {
   $insertMessageData = "insert into `home_work_20`.`messages` (sender_user_id, receiver_user_id, section_id, title, message) values (?, ?, ?, ?, ?)";
   
-  $titleText = isset($_POST['title_text']);
-  $bodyText = isset($_POST['body_text']);
-  $receiverUser = isset($_POST['receiver_user']);
-  $messageSection = isset($_POST['message_section']);
+  $receiverUser = (int) $_POST['receiver_user'];
+  $messageSection = (int) $_POST['message_section'];
+  $titleText = (string) $_POST['title_text'];
+  $bodyText = (string) $_POST['body_text'];
   
-  sendQueryDB($insertMessageData, [$userId, $receiverUser, $messageSection, $titleText, $bodyText]);
+  sendQueryDB($insertMessageData, [$senderUser, $receiverUser, $messageSection, $titleText, $bodyText]);
 }
 
 ?>
@@ -32,7 +32,7 @@ if (isset($_POST['title_text']) && isset($_POST['body_text']) && isset($_POST['r
     <tr>
       <td class="iat">
           <label for="title_text">Заголовок:</label>
-          <input required class="post_container" size="30" name="title_text">
+          <input required class="post_container" size="30" type="text" name="title_text">
       </td>
     </tr>
     <tr>
