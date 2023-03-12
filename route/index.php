@@ -6,6 +6,8 @@ $serverRootPath = $_SERVER['DOCUMENT_ROOT'];
 require_once ($serverRootPath . '/src/constants.php');
 require_once ($serverRootPath . HEADER);
 
+$uriPostId = isset($_GET['id']) ? URI_DISPLAY_POST . "?id=" . $_GET['id'] : URI_DISPLAY_POST;
+
 ?>
 <table width="100%" cellspacing="0" cellpadding="0">
     <tr>
@@ -31,6 +33,8 @@ require_once ($serverRootPath . HEADER);
                     include ($serverRootPath . POSTS_PAGE);
                 } elseif ($uri == URI_ADD_POSTS && isWriter()) {
                     include ($serverRootPath . ADD_POST_PAGE);
+                } elseif ($uri == $uriPostId && isWriter()) {
+                    include ($serverRootPath . DISPLAY_POST_PAGE);
                 } else {
                     include ($serverRootPath . MAIN_PAGE);
                 }
