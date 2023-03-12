@@ -32,13 +32,13 @@ if (isset($_POST['title_text']) && isset($_POST['body_text']) && isset($_POST['r
     <tr>
       <td class="iat">
           <label for="title_text">Заголовок:</label>
-          <input required class="post_container" size="30" type="text" name="title_text">
+          <input required class="post_container" size="30" type="text" name="title_text" value="<?=htmlspecialchars($_POST['title_text'] ?? '')?>">
       </td>
     </tr>
     <tr>
       <td class="iat">
           <label for="body_text">Текст сообщения:</label>
-          <textarea required class="post_container post-textarea_container" name="body_text"></textarea>
+          <textarea required class="post_container post-textarea_container" name="body_text" value="<?=htmlspecialchars($_POST['body_text'] ?? '')?>"></textarea>
       </td>
     </tr>
     <tr>

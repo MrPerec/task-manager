@@ -52,11 +52,11 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['passwor
             <tr>
                 <td class="iat">
                     <label for="reg_password_id">Ваш пароль*:</label>
-                    <input id="reg_password_id" size="30" name="password" type="password" required value="<?=htmlspecialchars($_POST['password'] ?? '')?>">
+                    <input id="reg_password_id" size="30" name="password" type="password" required value="<?=htmlspecialchars('')?>">
                 </td>
                 <td class="iat">
                     <label for="reg_confirm_password_id">Подтверждение пароля*:</label>
-                    <input id="reg_confirm_password_id" size="30" name="password_confirm" type="password" required value="<?=htmlspecialchars($_POST['password_confirm'] ?? '')?>">
+                    <input id="reg_confirm_password_id" size="30" name="password_confirm" type="password" required value="<?=htmlspecialchars('')?>">
                 </td>
             </tr>
             <tr>
