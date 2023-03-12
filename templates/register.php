@@ -32,31 +32,31 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['passwor
             <tr>
                 <td class="iat">
                     <label for="reg_surname_id">Фамилия:</label>
-                    <input id="reg_surname_id" size="30" name="surname" value="">
+                    <input id="reg_surname_id" size="30" name="surname" value="<?=htmlspecialchars($_POST['surname'] ?? '')?>">
                 </td>
                 <td class="iat">
                     <label for="reg_name_id">Имя:</label>
-                    <input id="reg_name_id" size="30" name="name" value="">
+                    <input id="reg_name_id" size="30" name="name" value="<?=htmlspecialchars($_POST['name'] ?? '')?>">
                 </td>
                 <td class="iat">
                     <label for="reg_middle_name_id">Отчество:</label>
-                    <input id="reg_middle_name_id" size="30" name="middle_name" value="">
+                    <input id="reg_middle_name_id" size="30" name="middle_name" value="<?=htmlspecialchars($_POST['middle_name'] ?? '')?>">
                 </td>
             </tr>
             <tr>
                 <td class="iat">
                     <label for="reg_login_id">Ваш логин*:</label>
-                    <input id="reg_login_id" size="30" name="login" required value="">
+                    <input id="reg_login_id" size="30" name="login" required value="<?=htmlspecialchars($_POST['login'] ?? '')?>">
                 </td>
             </tr>
             <tr>
                 <td class="iat">
                     <label for="reg_password_id">Ваш пароль*:</label>
-                    <input id="reg_password_id" size="30" name="password" type="password" required value="">
+                    <input id="reg_password_id" size="30" name="password" type="password" required value="<?=htmlspecialchars($_POST['password'] ?? '')?>">
                 </td>
                 <td class="iat">
                     <label for="reg_confirm_password_id">Подтверждение пароля*:</label>
-                    <input id="reg_confirm_password_id" size="30" name="password_confirm" type="password" required value="">
+                    <input id="reg_confirm_password_id" size="30" name="password_confirm" type="password" required value="<?=htmlspecialchars($_POST['password_confirm'] ?? '')?>">
                 </td>
             </tr>
             <tr>
