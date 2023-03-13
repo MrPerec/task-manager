@@ -17,6 +17,8 @@ define('AUTH_ERR_MSG', '/include/auth_error_message.php');
 define('REG_SUCC_MSG', '/include/registr_success_message.php');
 define('REG_PASS_MATCH_ERR_MSG', '/include/registr_pass_match_error_message.php');
 define('REG_PASS_LENGTH_ERR_MSG', '/include/registr_pass_length_error_message.php');
+define('SENT_MESSAGE_ERR_MSG', '/include/message_sent_error.php');
+define('SENT_MESSAGE_SUCC_MSG', '/include/message_sent_success.php');
 
 define('ABOUT_PAGE', '/include/about.php');
 define('CONTACTS_PAGE', '/include/contacts.php');

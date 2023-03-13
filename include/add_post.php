@@ -14,6 +14,8 @@ $selectSectionsData = "SELECT * FROM home_work_20.sections";
 $usersWritersData = sendQueryDB($selectGetUsersWritersData, [$senderUser])['responseData'];
 $sectionsData = sendQueryDB($selectSectionsData)['responseData'];
 
+$isError = false;
+
 if (isset($_POST['title_text']) && isset($_POST['body_text']) && isset($_POST['receiver_user']) && isset($_POST['message_section'])) {
   $insertMessageData = "insert into `home_work_20`.`messages` (sender_user_id, receiver_user_id, section_id, title, message) values (?, ?, ?, ?, ?)";
   
@@ -21,8 +23,15 @@ if (isset($_POST['title_text']) && isset($_POST['body_text']) && isset($_POST['r
   $messageSection = (int) $_POST['message_section'];
   $titleText = (string) $_POST['title_text'];
   $bodyText = (string) $_POST['body_text'];
-  
-  sendQueryDB($insertMessageData, [$senderUser, $receiverUser, $messageSection, $titleText, $bodyText]);
+
+  try {
+    $isMessageSent = sendQueryDB($insertMessageData, [$senderUser, $receiverUser, $messageSection, $titleText, $bodyText]);
+    include_once $serverRootPath . SENT_MESSAGE_SUCC_MSG;
+  } catch (Throwable $error) {
+      $isError = true;
+      include_once $serverRootPath . SENT_MESSAGE_ERR_MSG;
+      ?><div class="text_error"><?=$error->getMessage()?></div><?php
+  }
 }
 
 ?>
@@ -32,13 +41,13 @@ if (isset($_POST['title_text']) && isset($_POST['body_text']) && isset($_POST['r
     <tr>
       <td class="iat">
           <label for="title_text">Заголовок:</label>
-          <input required class="post_container" size="30" type="text" name="title_text" value="<?=htmlspecialchars($_POST['title_text'] ?? '')?>">
+          <input required class="post_container" size="30" type="text" name="title_text" value="<?=htmlspecialchars($isError ? $_POST['title_text'] : '')?>">
       </td>
     </tr>
     <tr>
       <td class="iat">
           <label for="body_text">Текст сообщения:</label>
-          <textarea required class="post_container post-textarea_container" name="body_text" value="<?=htmlspecialchars($_POST['body_text'] ?? '')?>"></textarea>
+          <textarea required class="post_container post-textarea_container" name="body_text"><?=htmlspecialchars($isError ? $_POST['body_text'] : '')?></textarea>
       </td>
     </tr>
     <tr>
